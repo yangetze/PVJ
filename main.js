@@ -23,27 +23,27 @@ navLinks.querySelectorAll('a').forEach(link => {
 const faqData = [
     {
         question: "¿Qué debo llevar al campamento?",
-        answer: "Debes traer: ropa cómoda para actividades al aire libre, traje de baño, toalla, aseo personal, medicamentos (si aplica), documentos de identidad, dinero para gastos adicionales y objetos de valor guardados. NO se recomiendan artículos electrónicos excepto cámara fotográfica. El kit de bienvenida incluye la mayoría de lo esencial."
+        answer: "Debes traer: ropa cómoda para actividades al aire libre, traje de baño, toalla, aseo personal, sábanas y cobijas, medicamentos (si aplica) y documentos de identidad. Te recomendamos no traer objetos de valor como joyas o equipos electrónicos costosos — el equipo no se responsabiliza por pérdidas o daños de objetos personales."
     },
     {
-        question: "¿Se incluye transporte desde Caracas?",
-        answer: "El transporte desde Caracas a Campo Carabobo NO está incluido en la tarifa base. Sin embargo, estamos organizando opciones de transporte grupal a precio especial. Consulta con el equipo de registro para coordinar opciones de viaje desde tu localidad."
+        question: "¿Se incluye el transporte?",
+        answer: "¡Sí, el transporte está incluido! Contarás con traslado desde la iglesia hasta Campo Carabobo en un transporte cómodo y seguro. No tienes que preocuparte por cómo llegar — nosotros te llevamos."
     },
     {
         question: "¿Cuáles son los métodos de pago aceptados?",
-        answer: "Aceptamos: transferencias bancarias nacionales, pagos móviles (Banesco, Mercantil, BOD), pago en efectivo en nuestras oficinas, y planes de pago en 3 cuotas sin interés. También aceptamos criptomonedas para participantes internacionales. Consulta con nuestro equipo de finanzas para más detalles."
+        answer: "Aceptamos: pago móvil (Banesco, Mercantil, BOD), USD en efectivo, EUR en efectivo y bolívares a la tasa euro del día del pago. Si necesitas otro método de pago, comunícate con el equipo y buscamos una solución juntos."
     },
     {
         question: "¿Hay límite de participantes?",
-        answer: "Sí, tenemos capacidad limitada a 300 participantes para garantizar una experiencia de calidad. Las inscripciones son por orden de llegada. Te recomendamos registrarte lo antes posible para asegurar tu lugar en esta edición de In-Cómodamente 2026."
+        answer: "Sí, el campamento tiene un cupo máximo de 70 personas. Las inscripciones son por orden de llegada y los cupos se llenan rápido. Si estás leyendo esto, todavía hay campo — ¡no esperes más para asegurar tu lugar!"
     },
     {
         question: "¿Qué pasa si tengo alergias o restricciones alimentarias?",
-        answer: "Es muy importante que reportes cualquier alergia, intolerancia o restricción alimentaria durante el proceso de registro. Nuestro equipo de catering está preparado para manejar dietas vegetarianas, veganas, sin gluten y otras restricciones especiales. Haremos todo lo posible para garantizar una experiencia segura y cómoda."
+        answer: "Es importante que nos cuentes si tienes alguna alergia, intolerancia o restricción alimentaria. Esa información es valiosa para que el equipo pueda ajustarse de la mejor manera posible y estar al tanto de tus necesidades."
     },
     {
-        question: "¿Hay límite de edad para asistir?",
-        answer: "El campamento está diseñado para jóvenes de 14 a 25 años. Esta rango etario permite crear un ambiente cohesivo donde todos puedan conectar y crecer juntos. Si tienes preguntas sobre edad, contacta directamente al equipo organizador."
+        question: "¿Para qué edades es el campamento?",
+        answer: "El campamento es para jóvenes de 14 a 25 años. Así logramos crear un espacio donde todos se sientan identificados y puedan conectar de verdad. Si tienes dudas, escríbenos."
     }
 ];
 
