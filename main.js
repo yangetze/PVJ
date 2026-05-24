@@ -31,7 +31,19 @@ const faqData = [
     },
     {
         question: "¿Cuáles son los métodos de pago aceptados?",
-        answer: "Aceptamos: pago móvil (Banesco, Mercantil, BOD), USD en efectivo, EUR en efectivo y bolívares a la tasa euro del día del pago. Si necesitas otro método de pago, comunícate con el equipo y buscamos una solución juntos."
+        answer: "Aceptamos Bs. por pago móvil o transferencia a la tasa euro del día BCV. También recibimos efectivo en dólares o euros. Si dispones de otro método de pago, consúltalo al equipo."
+    },
+    {
+        question: "¿Puedo pagar en cuotas?",
+        answer: "No somos el logo amarillo, pero definitivamente puedes pagar en cómodas cuotas."
+    },
+    {
+        question: "¿Cómo puedo apartar mi cupo?",
+        answer: "Debes realizar un abono de mínimo 10 € a la tasa del día. Si tienes dudas, puedes consultarlo los domingos al finalizar cada culto, o escribirnos por Instagram o WhatsApp, o consultarlo con el staff."
+    },
+    {
+        question: "¿Cuál es la fecha límite para terminar de pagar?",
+        answer: "5 días antes del comienzo del evento. Si tienes dudas, acércate a la mesa el día domingo."
     },
     {
         question: "¿Hay límite de participantes?",
@@ -44,6 +56,10 @@ const faqData = [
     {
         question: "¿Para qué edades es el campamento?",
         answer: "El campamento es para jóvenes de 14 a 25 años. Así logramos crear un espacio donde todos se sientan identificados y puedan conectar de verdad. Si tienes dudas, escríbenos."
+    },
+    {
+        question: "¿Necesito ser cristiano o asistir a una iglesia para asistir al campamento?",
+        answer: "Todos son bienvenidos."
     }
 ];
 
