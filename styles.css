@@ -830,6 +830,40 @@ footer {
     font-size: 0.85rem;
 }
 
+.other-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.other-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    padding: var(--spacing-sm) 0;
+    transition: all var(--transition-fast);
+    border-left: 2px solid transparent;
+    padding-left: var(--spacing-sm);
+}
+
+.other-link:hover {
+    color: var(--accent-lime);
+    border-left-color: var(--accent-lime);
+    padding-left: calc(var(--spacing-sm) + 4px);
+}
+
+.other-link-icon {
+    font-size: 1.2rem;
+    display: inline-block;
+    min-width: 1.5rem;
+}
+
+.other-link-text {
+    color: inherit;
+}
+
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */
