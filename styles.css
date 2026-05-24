@@ -676,6 +676,9 @@ nav {
 .faq-item:nth-child(4) { animation-delay: 0.8s; }
 .faq-item:nth-child(5) { animation-delay: 0.9s; }
 .faq-item:nth-child(6) { animation-delay: 1s; }
+.faq-item:nth-child(7) { animation-delay: 1.1s; }
+.faq-item:nth-child(8) { animation-delay: 1.2s; }
+.faq-item:nth-child(9) { animation-delay: 1.3s; }
 
 .faq-item.active {
     border-left-color: var(--accent-lime);
