@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Pago — PVJ 2026</title>
+    <meta name="description" content="Calcula el equivalente en bolívares de tu inscripción al Campamento PVJ 2026 según la Tasa Euro BCV del día.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- HEADER & NAVIGATION -->
+    <header>
+        <nav class="container">
+            <div class="logo">PVJ 2026</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#home">Inicio</a></li>
+                <li><a href="index.html#interested-form">Interesado</a></li>
+                <li><a href="index.html#registration">Registro</a></li>
+                <li><a href="index.html#payment">Pago</a></li>
+                <li><a href="calculadora.html" class="active">Calculadora</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- CALCULATOR PAGE -->
+    <main class="calc-page">
+        <div class="container">
+
+            <div class="calc-page-header">
+                <a href="index.html#payment" class="calc-back-link">← Información de Pago</a>
+                <h1 class="calc-page-title">Calculadora de Pago en Bolívares</h1>
+                <p class="calc-page-subtitle">Convierte tu inscripción de euros a bolívares usando la Tasa Euro BCV de hoy</p>
+            </div>
+
+            <div class="calculator-card">
+                <div class="calculator-header">
+                    <h3 class="calculator-title">💱 Calculadora de Pago en Bolívares</h3>
+                    <p class="calculator-subtitle">Convierte euros a Bs. según la Tasa Euro BCV de hoy</p>
+                </div>
+                <div class="calculator-body">
+                    <div class="calculator-input-group">
+                        <label class="calculator-label" for="euroInput">Monto en Euros</label>
+                        <div class="calculator-input-wrapper">
+                            <span class="calculator-currency-symbol">€</span>
+                            <input type="number" id="euroInput" class="calculator-input" value="95" min="0" step="1" placeholder="95">
+                        </div>
+                    </div>
+                    <div class="calculator-arrow" aria-hidden="true">→</div>
+                    <div class="calculator-output-group">
+                        <label class="calculator-label">Equivalente en Bolívares</label>
+                        <div class="calculator-result">
+                            <span class="calculator-result-currency">Bs.</span>
+                            <span class="calculator-result-value" id="bsResultValue">—</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="calculator-note" id="calculatorNote">
+                    <span class="calculator-note-icon">⏳</span>
+                    <span>Obteniendo tasa BCV del día…</span>
+                </div>
+            </div>
+
+            <div class="calc-page-actions">
+                <a href="index.html#payment" class="btn btn-secondary">← Volver a Información de Pago</a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>PVJ 2026</h3>
+                    <p>Plan Vacacional Juvenil 2026: In-Cómodamente. Gestionado bajo la coordinación de jóvenes, y Ministerio de Proclamación de la Iglesia Bautista Emanuel. Campamento con propósito de crecimiento espiritual en los jóvenes.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html#home">Inicio</a></li>
+                        <li><a href="index.html#interested-form">Formulario de Interesado</a></li>
+                        <li><a href="index.html#registration">Registro</a></li>
+                        <li><a href="index.html#payment">Información de Pago</a></li>
+                        <li><a href="calculadora.html">Calculadora de Pago</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>Email: <a href="mailto:ministeriojuvenilibe@gmail.com">ministeriojuvenilibe@gmail.com</a></p>
+                    <p>Teléfono: <a href="tel:+58000000000">+58 (0) 000-0000</a></p>
+                    <p>Ubicación: <a href="https://maps.app.goo.gl/31Uu8S2GkfhWCuca9" target="_blank" rel="noopener noreferrer">Calle Urdaneta con Av. Eugenio Mendoza, Condominio Renaissance La Castellana.</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Otros Enlaces de Interés</h3>
+                    <div class="other-links">
+                        <a href="https://www.instagram.com/ministeriojuvenilibe?igsh=dWtmNGF1eGZvOHNp" target="_blank" rel="noopener noreferrer" class="other-link">
+                            <span class="other-link-icon">📱</span>
+                            <span class="other-link-text">Ministerio Juvenil IBE</span>
+                        </a>
+                        <a href="https://www.instagram.com/ibemanuel_ve?igsh=NWl3dzd6cDNwajc4" target="_blank" rel="noopener noreferrer" class="other-link">
+                            <span class="other-link-icon">📱</span>
+                            <span class="other-link-text">Iglesia Bautista Emanuel (IBE)</span>
+                        </a>
+                        <a href="https://ibe.org.ve/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAb21jcAR_Z95leHRuA2FlbQIxMQBzcnRjBmFwcF9pZA01NjcwNjczNDMzNTI0MjcAAadOOrgETjL6SBcbDUCn283n1OYLlhePJa_xKUQujj7XJ1d_ZzoRWh7jWRweeg_aem_tDl8BLzA64gZrhRH1rPAsA" target="_blank" rel="noopener noreferrer" class="other-link">
+                            <span class="other-link-icon">🌐</span>
+                            <span class="other-link-text">Sitio Web IBE</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Plan Vacacional Juvenil de la Iglesia Bautista Emanuel.<br>
+                Caracas, Venezuela.<br>
+                2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
