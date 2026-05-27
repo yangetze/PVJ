@@ -1,0 +1,182 @@
+// ============================================
+// NAVIGATION HANDLING
+// ============================================
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('navLinks');
+
+hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+    });
+});
+
+// ============================================
+// DONATIONS FAQ DATA
+// ============================================
+const donacionesFaqData = [
+    {
+        question: "¿Dónde va exactamente mi dinero?",
+        answer: `
+            <p><strong>Tu donación cubre los costos reales de la beca del joven:</strong></p>
+            <ul>
+                <li>Inscripción al campamento: €40</li>
+                <li>Alojamiento: €30</li>
+                <li>Comidas: €15</li>
+                <li>Transporte: €10</li>
+            </ul>
+            <p><strong>100% del dinero va a la experiencia del joven.</strong> No hay intermediarios ni comisiones administrativas. Total transparencia.</p>
+        `
+    },
+    {
+        question: "¿Sé quién es el joven al que ayudo?",
+        answer: `
+            <p>Comprendemos el deseo de conexión personal. Por confidencialidad, no compartimos nombres completos de menores de edad.</p>
+            <p><strong>PERO recibirás:</strong></p>
+            <ul>
+                <li>Descripción anónima (ej: 'Juan, 17 años, participa en escuela dominical')</li>
+                <li>Historias de impacto post-campamento</li>
+                <li>Fotos del campamento (sin identificación)</li>
+                <li>Testimonio breve (si la familia autoriza)</li>
+            </ul>
+            <p>Nuestro compromiso es con la dignidad y privacidad del joven, no con ocultarle el impacto de tu generosidad.</p>
+        `
+    },
+    {
+        question: "¿Puedo donar menos de €95?",
+        answer: `
+            <p><strong>¡Sí! Aclaración importante:</strong></p>
+            <p>Una beca completa = €95, pero nada te obliga a darla entera.</p>
+            <p><strong>Opciones reales:</strong></p>
+            <ul>
+                <li>Donar €10 = ya ayudas</li>
+                <li>Donar €25 + otro donante + otro = beca completa</li>
+                <li>Donar €95 = cambias una vida completa</li>
+            </ul>
+            <p>La belleza es que la comunidad se une. No es 'tu responsabilidad individual', es 'nuestro compromiso colectivo'.</p>
+        `
+    },
+    {
+        question: "¿Es deducible fiscalmente?",
+        answer: `
+            <p>Buena pregunta. La Iglesia Bautista Emanuel cuenta con reconocimiento legal como organización sin fines de lucro.</p>
+            <p><strong>Para detalles fiscales específicos de tu país, recomendamos consultar:</strong></p>
+            <p>📧 <a href="mailto:ministeriojuvenilibe@gmail.com">ministeriojuvenilibe@gmail.com</a></p>
+            <p>Nosotros te proporcionamos comprobante de donación formal para cualquier gestión tributaria.</p>
+        `
+    },
+    {
+        question: "¿Qué pasa si se juntan más fondos de los necesarios?",
+        answer: `
+            <p><strong>Excelente pregunta.</strong> Si excedemos la meta:</p>
+            <ul>
+                <li><strong>Plan A:</strong> Extender las becas a más jóvenes</li>
+                <li><strong>Plan B:</strong> Mejorar la experiencia (más actividades, mejor catering)</li>
+                <li><strong>Plan C:</strong> Fondo para campamentos futuros del ministerio juvenil</li>
+            </ul>
+            <p><strong>Seremos transparentes al 100%</strong> sobre cómo se usa cada euro. Te enviaremos un reporte completo.</p>
+        `
+    },
+    {
+        question: "¿Qué si no llegamos a la meta de 10 becas?",
+        answer: `
+            <p><strong>Honestidad:</strong> Si faltamos fondos, priorizaremos los jóvenes con mayor necesidad económica y mayor compromiso ministerial.</p>
+            <p>Pero queremos llegar a todos. Por eso estamos contigo. Cada donación nos acerca más a la meta.</p>
+        `
+    },
+    {
+        question: "¿Recibiré comprobante de mi donación?",
+        answer: `
+            <p><strong>Sí. 100% transparencia.</strong></p>
+            <p>Enviaremos:</p>
+            <ul>
+                <li>✓ Recibo digital (con número de transacción)</li>
+                <li>✓ Confirmación de impacto (ej: 'Tu donación aseguró transporte para un joven de 17 años')</li>
+                <li>✓ Fotos post-campamento (respetando privacidad)</li>
+            </ul>
+            <p>Simplemente, danos tu email al realizar la donación.</p>
+        `
+    }
+];
+
+// ============================================
+// FAQ RENDERING
+// ============================================
+function renderDonacionesFAQ() {
+    const faqContainer = document.getElementById('donacionesFaqContainer');
+    if (!faqContainer) return;
+
+    donacionesFaqData.forEach((faq, index) => {
+        const faqItem = document.createElement('div');
+        faqItem.className = 'faq-item';
+        faqItem.innerHTML = `
+            <div class="faq-question" data-index="${index}">
+                <span class="faq-question-text">${faq.question}</span>
+                <div class="faq-toggle"></div>
+            </div>
+            <div class="faq-answer">
+                <div class="faq-answer-content">
+                    ${faq.answer}
+                </div>
+            </div>
+        `;
+        faqContainer.appendChild(faqItem);
+    });
+
+    document.querySelectorAll('#donacionesFaqContainer .faq-question').forEach(question => {
+        question.addEventListener('click', function () {
+            const faqItem = this.parentElement;
+            const isActive = faqItem.classList.contains('active');
+
+            document.querySelectorAll('#donacionesFaqContainer .faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        });
+    });
+}
+
+// ============================================
+// SCROLL ANIMATIONS
+// ============================================
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -60px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+});
+
+// ============================================
+// INITIALIZATION
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    renderDonacionesFAQ();
+
+    // Smooth scroll for internal anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+});
