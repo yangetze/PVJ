@@ -218,44 +218,55 @@ function initCountdown() {
     const eventEnd   = new Date('2026-08-29T04:00:00Z');
 
     let intervalId = null;
+    let renderedMode = null; // 'countdown' | 'camping' | 'hidden'
 
     function pad(n) {
         return String(n).padStart(2, '0');
     }
 
-    function renderCountdown(ms) {
+    // Build the countdown skeleton once — subsequent ticks only update the text nodes
+    function buildCountdown() {
+        countdownEl.innerHTML = `
+            <div class="countdown-wrapper">
+                <p class="countdown-label">Faltan para el campamento</p>
+                <div class="countdown-grid">
+                    <div class="countdown-unit">
+                        <span class="countdown-value" id="cd-days">00</span>
+                        <span class="countdown-unit-label">días</span>
+                    </div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit">
+                        <span class="countdown-value" id="cd-hours">00</span>
+                        <span class="countdown-unit-label">horas</span>
+                    </div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit">
+                        <span class="countdown-value" id="cd-minutes">00</span>
+                        <span class="countdown-unit-label">minutos</span>
+                    </div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit">
+                        <span class="countdown-value" id="cd-seconds">00</span>
+                        <span class="countdown-unit-label">segundos</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        renderedMode = 'countdown';
+    }
+
+    // Only touch the four number nodes — no DOM structure changes, no animation replay
+    function updateCountdown(ms) {
         const totalSec = Math.max(0, Math.floor(ms / 1000));
         const days    = Math.floor(totalSec / 86400);
         const hours   = Math.floor((totalSec % 86400) / 3600);
         const minutes = Math.floor((totalSec % 3600) / 60);
         const seconds = totalSec % 60;
 
-        countdownEl.innerHTML = `
-            <div class="countdown-wrapper">
-                <p class="countdown-label">Faltan para el campamento</p>
-                <div class="countdown-grid">
-                    <div class="countdown-unit">
-                        <span class="countdown-value">${pad(days)}</span>
-                        <span class="countdown-unit-label">días</span>
-                    </div>
-                    <span class="countdown-sep">:</span>
-                    <div class="countdown-unit">
-                        <span class="countdown-value">${pad(hours)}</span>
-                        <span class="countdown-unit-label">horas</span>
-                    </div>
-                    <span class="countdown-sep">:</span>
-                    <div class="countdown-unit">
-                        <span class="countdown-value">${pad(minutes)}</span>
-                        <span class="countdown-unit-label">minutos</span>
-                    </div>
-                    <span class="countdown-sep">:</span>
-                    <div class="countdown-unit">
-                        <span class="countdown-value">${pad(seconds)}</span>
-                        <span class="countdown-unit-label">segundos</span>
-                    </div>
-                </div>
-            </div>
-        `;
+        document.getElementById('cd-days').textContent    = pad(days);
+        document.getElementById('cd-hours').textContent   = pad(hours);
+        document.getElementById('cd-minutes').textContent = pad(minutes);
+        document.getElementById('cd-seconds').textContent = pad(seconds);
     }
 
     function renderCamping() {
@@ -265,6 +276,7 @@ function initCountdown() {
                 <p class="countdown-camping-text">¡Estamos de campamento!</p>
             </div>
         `;
+        renderedMode = 'camping';
     }
 
     function tick() {
@@ -278,14 +290,15 @@ function initCountdown() {
         }
 
         if (now >= eventStart) {
-            // Aug 24–28: camping message (static, no need to tick every second)
-            renderCamping();
+            // Aug 24–28: show camping message once, then stop ticking
+            if (renderedMode !== 'camping') renderCamping();
             if (intervalId) clearInterval(intervalId);
             return;
         }
 
-        // Before Aug 24: live countdown
-        renderCountdown(eventStart - now);
+        // Before Aug 24: live countdown — build structure once, then just update numbers
+        if (renderedMode !== 'countdown') buildCountdown();
+        updateCountdown(eventStart - now);
     }
 
     tick();
