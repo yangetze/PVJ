@@ -22,23 +22,50 @@ python3 -m http.server 8080
 
 ```
 PVJ/
-├── index.html      # HTML structure and content only
-├── styles.css      # All CSS: design system, layout, components, responsive
-├── main.js         # All JavaScript: nav, FAQ, countdown, BCV rate, calculator
+├── index.html        # Main page — content only, no nav/footer HTML
+├── calculadora.html  # Calculator page — content only
+├── donaciones.html   # Donations page — content only
+├── styles.css        # All CSS: design system, layout, components, responsive
+├── components.js     # Shared header (nav) + footer — SINGLE SOURCE OF TRUTH
+├── main.js           # index.html & calculadora.html JS: FAQ, countdown, BCV, calculator
+├── donaciones.js     # donaciones.html JS: donations FAQ, scroll animations
 ├── docs/
-│   └── brand.md    # Brand guidelines: colors, tone of voice, copy examples
-└── CLAUDE.md       # This file
+│   └── brand.md      # Brand guidelines: colors, tone of voice, copy examples
+└── CLAUDE.md         # This file
 ```
 
-The project follows strict separation of concerns across three source files:
+The project follows strict separation of concerns:
 
 | File | Responsibility |
 |---|---|
-| `index.html` | HTML structure and content only — no inline styles or scripts |
+| `*.html` | Page content only — no inline styles, scripts, nav, or footer HTML |
 | `styles.css` | All CSS: design system variables, layout, components, responsive breakpoints |
-| `main.js` | All JavaScript: navigation, FAQ data + rendering, countdown, BCV rate, calculator |
+| `components.js` | **Shared header + footer** — rendered into every page; also owns hamburger logic |
+| `main.js` | index.html / calculadora.html JS: FAQ data + rendering, countdown, BCV rate, calculator |
+| `donaciones.js` | donaciones.html JS: donations FAQ data + rendering, scroll animations |
 
-`index.html` links these with `<link rel="stylesheet" href="styles.css">` in `<head>` and `<script src="main.js"></script>` just before `</body>`.
+### Script loading order (mandatory for every page)
+
+Every `.html` file must load scripts in this exact order just before `</body>`:
+
+```html
+<script src="components.js"></script>   <!-- always first — renders <header> and <footer> -->
+<script src="main.js"></script>          <!-- or donaciones.js for the donations page -->
+```
+
+`components.js` runs synchronously and populates the empty `<header></header>` and `<footer></footer>` placeholders before any page-specific script runs.
+
+### Adding a new page
+
+1. Create `newpage.html` with standard `<head>` (linking `styles.css`).
+2. Add an empty `<header></header>` near the top of `<body>`.
+3. Add an empty `<footer></footer>` near the bottom of `<body>`.
+4. Load `components.js` (then your page-specific script) just before `</body>`.
+5. Add the new page's nav entry to `NAV_ITEMS` in `components.js` — that's the **only** place to touch for nav/footer changes.
+
+### Modifying the shared nav or footer
+
+**Only edit `components.js`.** Never copy nav/footer HTML into an individual page. Changes in `components.js` propagate to every page automatically.
 
 ## HTML Sections Inventory
 
@@ -79,15 +106,25 @@ Custom design system using CSS variables (on `:root`), CSS Grid/Flexbox layouts,
 - Print styles (`@media print`) that hide nav/footer and expand all FAQ answers
 - Accessibility focus styles (`:focus`, `:focus-visible`) using `--accent-lime` outline
 
+### `components.js`
+
+Runs synchronously (no `DOMContentLoaded` needed — scripts load after the body parses). Wrapped in an IIFE to avoid polluting the global scope. Responsibilities:
+
+1. **Page detection** — reads `window.location.pathname` to know which page is active
+2. **Header rendering** — builds the `<nav>` HTML from the `NAV_ITEMS` array and injects it into the empty `<header>` element; sets the `active` class on the correct link
+3. **Hamburger menu** — wires the click handler and `aria-expanded` state; nav links close the menu on click
+4. **Footer rendering** — builds the full 4-column footer and injects it into the empty `<footer>` element
+
+**`NAV_ITEMS` array** is the single place to add, rename, or reorder nav links. Each entry has `href`, `label`, `activeFile`, and `isAnchor`.
+
 ### `main.js`
 
-Vanilla JS with five responsibilities, all initialized inside `DOMContentLoaded`:
+Vanilla JS with four responsibilities, all initialized inside `DOMContentLoaded`:
 
-1. **Mobile hamburger menu** — toggles `.active` on `#navLinks`; clicking any nav link also closes the menu and updates the `.active` link state
-2. **FAQ accordion** — `faqData` array is defined at the top of the file and rendered dynamically into `#faqContainer`; only one item can be open at a time
-3. **Hero countdown** (`initCountdown()`) — live countdown to event start (Aug 24, 2026 00:00 VET = `2026-08-24T04:00:00Z`); shows a "¡Estamos de campamento!" message Aug 24–28; hides silently after Aug 29; ticks every second via `setInterval`
-4. **Live BCV euro rate** (`fetchEuroRate()`) — fetches `https://rates.dolarvzla.com/bcv/current.json` and reads the euro rate from multiple possible response shapes (`data.current.eur`, `data.eur`, `data.EUR`, `data.rates.eur`, etc.); populates `#eurRateBadge` and `#calculatorNote`; stores rate in module-level `currentEuroRate`
-5. **Euro→Bs calculator** (`updateCalculation()`) — multiplies the `#euroInput` value by `currentEuroRate` and renders the result in `#bsResultValue`; wired to the `input` event of `#euroInput`
+1. **FAQ accordion** — `faqData` array is defined at the top of the file and rendered dynamically into `#faqContainer`; only one item can be open at a time
+2. **Hero countdown** (`initCountdown()`) — live countdown to event start (Aug 24, 2026 00:00 VET = `2026-08-24T04:00:00Z`); shows a "¡Estamos de campamento!" message Aug 24–28; hides silently after Aug 29; ticks every second via `setInterval`
+3. **Live BCV euro rate** (`fetchEuroRate()`) — fetches `https://rates.dolarvzla.com/bcv/current.json` and reads the euro rate from multiple possible response shapes (`data.current.eur`, `data.eur`, `data.EUR`, `data.rates.eur`, etc.); populates `#eurRateBadge` and `#calculatorNote`; stores rate in module-level `currentEuroRate`
+4. **Euro→Bs calculator** (`updateCalculation()`) — multiplies the `#euroInput` value by `currentEuroRate` and renders the result in `#bsResultValue`; wired to the `input` event of `#euroInput`
 
 **Initialization order inside `DOMContentLoaded`:**
 ```js
@@ -165,6 +202,8 @@ The aesthetic is **dark-themed and tech/neon**, with gradient text, `backdrop-fi
 
 - **No external dependencies** — do not introduce CDN links, npm packages, or build steps without explicit instruction.
 - **No inline styles or scripts** — all styles belong in `styles.css`, all logic in `main.js`. The only exceptions are the existing `style="..."` attributes in the hero section and the price card CTA button, which are accepted one-off layout overrides.
+- **⚠️ Header and footer are NEVER written into HTML files** — always use empty `<header></header>` and `<footer></footer>` placeholders. `components.js` renders both at runtime. Never paste nav or footer HTML directly into a page.
+- **Nav and footer changes go in `components.js` only** — specifically in the `NAV_ITEMS` array (for nav) and the `footerEl.innerHTML` template (for footer content). One edit propagates to all pages.
 - **FAQ data** lives in the `faqData` array at the top of `main.js`. To add or edit FAQ items, modify only that array — the renderer builds the DOM automatically.
 - **Colors must use CSS variables** — never hardcode hex values in new rules; always reference a `--variable` from the design system.
 - **Content language is Spanish (es-VE)** — the `<html lang="es">` attribute is set and all user-visible copy is in Venezuelan Spanish. Number formatting uses `toLocaleString('es-VE')`.
