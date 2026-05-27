@@ -898,6 +898,280 @@ nav {
 }
 
 /* ============================================
+   EURO RATE BADGE (inside price card)
+   ============================================ */
+.euro-rate-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    background: rgba(178, 223, 20, 0.07);
+    border: 1px solid rgba(178, 223, 20, 0.25);
+    border-radius: 2px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: var(--spacing-md) 0;
+    flex-wrap: wrap;
+    min-height: 48px;
+    transition: background var(--transition-normal);
+}
+
+.euro-rate-badge.loaded {
+    background: rgba(178, 223, 20, 0.1);
+    border-color: rgba(178, 223, 20, 0.4);
+}
+
+.euro-rate-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-secondary);
+    flex-shrink: 0;
+    transition: background var(--transition-normal);
+}
+
+.euro-rate-badge.loaded .euro-rate-dot {
+    background: var(--accent-lime);
+    box-shadow: 0 0 8px rgba(178, 223, 20, 0.8);
+    animation: live-pulse 2s ease-in-out infinite;
+}
+
+@keyframes live-pulse {
+    0%, 100% { box-shadow: 0 0 4px rgba(178, 223, 20, 0.5); }
+    50%       { box-shadow: 0 0 12px rgba(178, 223, 20, 1); }
+}
+
+.euro-rate-loading {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.euro-rate-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-lime);
+    font-weight: 600;
+}
+
+.euro-rate-value {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.euro-rate-value strong {
+    color: var(--accent-lime);
+}
+
+/* ============================================
+   EURO CALCULATOR SECTION
+   ============================================ */
+.calculator-section {
+    padding: var(--spacing-2xl) 0;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.calculator-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-top: 3px solid var(--accent-blue);
+    padding: var(--spacing-xl);
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+    opacity: 0;
+}
+
+.calculator-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.03) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.calculator-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.calculator-title {
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.calculator-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.calculator-body {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--spacing-lg);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.calculator-input-group,
+.calculator-output-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+}
+
+.calculator-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.calculator-input-wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 2px;
+    overflow: hidden;
+    transition: border-color var(--transition-fast);
+}
+
+.calculator-input-wrapper:focus-within {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.15);
+}
+
+.calculator-currency-symbol {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--bg-tertiary);
+    border-right: 1px solid var(--border-subtle);
+    color: var(--accent-lime);
+    font-weight: 700;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.calculator-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    width: 100%;
+}
+
+.calculator-input::-webkit-inner-spin-button,
+.calculator-input::-webkit-outer-spin-button {
+    opacity: 0.4;
+}
+
+.calculator-arrow {
+    font-size: 1.8rem;
+    color: var(--accent-blue);
+    padding-bottom: var(--spacing-xs);
+    flex-shrink: 0;
+    opacity: 0.8;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.calculator-arrow.calculating {
+    opacity: 0.4;
+    transform: scale(0.9);
+}
+
+.calculator-result {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-xs);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 2px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    min-height: 56px;
+    transition: border-color var(--transition-normal);
+}
+
+.calculator-result.has-value {
+    border-color: rgba(178, 223, 20, 0.3);
+}
+
+.calculator-result-currency {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.calculator-result-value {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--accent-lime);
+    font-family: var(--font-mono);
+    letter-spacing: -0.02em;
+}
+
+.calculator-note {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    background: rgba(0, 102, 255, 0.05);
+    border: 1px solid rgba(0, 102, 255, 0.15);
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-top: var(--spacing-xl);
+    border-radius: 2px;
+}
+
+.calculator-note-icon {
+    font-size: 0.95rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.calculator-note span:last-child {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: var(--line-height-relaxed);
+}
+
+.calculator-note strong {
+    color: var(--accent-blue-bright);
+}
+
+@media (max-width: 600px) {
+    .calculator-body {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacing-md);
+    }
+
+    .calculator-input-group,
+    .calculator-output-group {
+        max-width: 100%;
+        min-width: unset;
+    }
+
+    .calculator-arrow {
+        text-align: center;
+        transform: rotate(90deg);
+        padding: 0;
+    }
+}
+
+/* ============================================
    FAQ SECTION
    ============================================ */
 .faq-section {
