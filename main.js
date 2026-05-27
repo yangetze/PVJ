@@ -68,6 +68,7 @@ const faqData = [
 // ============================================
 function renderFAQ() {
     const faqContainer = document.getElementById('faqContainer');
+    if (!faqContainer) return;
 
     faqData.forEach((faq, index) => {
         const faqItem = document.createElement('div');
