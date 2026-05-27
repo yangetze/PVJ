@@ -401,6 +401,139 @@ nav {
 }
 
 /* ============================================
+   HERO COUNTDOWN
+   ============================================ */
+.hero-countdown {
+    margin-top: var(--spacing-xl);
+}
+
+/* --- Live countdown display --- */
+.countdown-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    background: rgba(10, 26, 58, 0.8);
+    border: 1px solid var(--border-subtle);
+    border-top: 3px solid var(--accent-blue);
+    padding: var(--spacing-xl) var(--spacing-2xl);
+    backdrop-filter: blur(8px);
+    position: relative;
+    animation: fadeInUp 0.9s ease-out 0.3s both;
+}
+
+.countdown-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-blue-bright), transparent);
+    opacity: 0.5;
+}
+
+.countdown-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-blue);
+    font-weight: 600;
+    margin: 0;
+}
+
+.countdown-grid {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 72px;
+}
+
+.countdown-value {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    font-family: var(--font-mono);
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--text-primary), var(--accent-lime));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    display: block;
+}
+
+.countdown-unit-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.countdown-sep {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--accent-blue);
+    line-height: 1;
+    padding-bottom: 1.4rem; /* align with numbers, not labels */
+    opacity: 0.6;
+    animation: blink 1s step-start infinite;
+}
+
+/* --- Camping message --- */
+.countdown-camping {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    background: rgba(178, 223, 20, 0.08);
+    border: 1px solid rgba(178, 223, 20, 0.35);
+    border-top: 3px solid var(--accent-lime);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    backdrop-filter: blur(8px);
+    animation: fadeInUp 0.9s ease-out both;
+}
+
+.countdown-camping-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.countdown-camping-text {
+    font-size: clamp(1.2rem, 3.5vw, 1.75rem);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--accent-lime);
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .countdown-wrapper {
+        padding: var(--spacing-lg);
+    }
+
+    .countdown-grid {
+        gap: var(--spacing-sm);
+    }
+
+    .countdown-unit {
+        min-width: 54px;
+    }
+
+    .countdown-sep {
+        padding-bottom: 1.2rem;
+    }
+}
+
+/* ============================================
    EVENT DETAILS CARD (TECHNICAL BOX)
    ============================================ */
 .event-details-card {
