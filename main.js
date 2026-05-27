@@ -152,6 +152,7 @@ async function fetchEuroRate() {
 
         // Handle multiple possible response shapes
         const rate =
+            (data.current && (data.current.eur ?? data.current.EUR)) ??
             data.eur ??
             data.EUR ??
             data.euro ??
