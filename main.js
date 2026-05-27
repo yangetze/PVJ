@@ -104,6 +104,105 @@ function renderFAQ() {
 }
 
 // ============================================
+// EURO RATE BADGE & CALCULATOR
+// ============================================
+
+let currentEuroRate = null;
+
+function formatBs(amount) {
+    return amount.toLocaleString('es-VE', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
+
+function updateCalculation() {
+    const input = document.getElementById('euroInput');
+    const resultEl = document.getElementById('bsResultValue');
+    const resultWrapper = resultEl ? resultEl.closest('.calculator-result') : null;
+    const arrow = document.querySelector('.calculator-arrow');
+
+    if (!input || !resultEl) return;
+
+    const euros = parseFloat(input.value) || 0;
+
+    if (arrow) arrow.classList.add('calculating');
+
+    if (currentEuroRate && euros >= 0) {
+        const bs = euros * currentEuroRate;
+        resultEl.textContent = euros === 0 ? '0,00' : formatBs(bs);
+        if (resultWrapper) resultWrapper.classList.toggle('has-value', euros > 0);
+    } else {
+        resultEl.textContent = '—';
+        if (resultWrapper) resultWrapper.classList.remove('has-value');
+    }
+
+    // Small delay to animate the arrow back
+    setTimeout(() => { if (arrow) arrow.classList.remove('calculating'); }, 150);
+}
+
+async function fetchEuroRate() {
+    const badge = document.getElementById('eurRateBadge');
+    const calcNote = document.getElementById('calculatorNote');
+
+    try {
+        const response = await fetch('https://rates.dolarvzla.com/bcv/current.json');
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+
+        // Handle multiple possible response shapes
+        const rate =
+            data.eur ??
+            data.EUR ??
+            data.euro ??
+            (data.rates && (data.rates.eur ?? data.rates.EUR)) ??
+            null;
+
+        if (!rate || isNaN(parseFloat(rate))) throw new Error('Euro rate not found in response');
+
+        currentEuroRate = parseFloat(rate);
+
+        // Update badge
+        if (badge) {
+            badge.innerHTML = `
+                <span class="euro-rate-dot"></span>
+                <span class="euro-rate-label">Tasa BCV hoy</span>
+                <span class="euro-rate-value">€1&nbsp;=&nbsp;<strong>Bs.&nbsp;${formatBs(currentEuroRate)}</strong></span>
+            `;
+            badge.classList.add('loaded');
+        }
+
+        // Update calculator note
+        if (calcNote) {
+            calcNote.innerHTML = `
+                <span class="calculator-note-icon">✅</span>
+                <span>Tasa BCV del día: <strong>€1 = Bs. ${formatBs(currentEuroRate)}</strong> · El monto puede variar al momento del pago según la tasa vigente.</span>
+            `;
+        }
+
+        // Trigger initial calculation
+        updateCalculation();
+
+    } catch (error) {
+        console.error('Error fetching euro rate:', error);
+
+        if (badge) {
+            badge.innerHTML = `
+                <span class="euro-rate-dot"></span>
+                <span class="euro-rate-loading">⚠️ Tasa no disponible — consultar en el momento del pago</span>
+            `;
+        }
+
+        if (calcNote) {
+            calcNote.innerHTML = `
+                <span class="calculator-note-icon">⚠️</span>
+                <span>No se pudo cargar la tasa BCV en este momento. El monto en bolívares se calcula a la tasa vigente al día del pago.</span>
+            `;
+        }
+    }
+}
+
+// ============================================
 // SCROLL ANIMATIONS
 // ============================================
 const observerOptions = {
@@ -128,4 +227,13 @@ document.querySelectorAll('.fade-in').forEach(el => {
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
     renderFAQ();
+
+    // Fetch live euro rate and populate badge + calculator
+    fetchEuroRate();
+
+    // Wire up calculator input
+    const euroInput = document.getElementById('euroInput');
+    if (euroInput) {
+        euroInput.addEventListener('input', updateCalculation);
+    }
 });
