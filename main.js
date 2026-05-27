@@ -204,6 +204,95 @@ async function fetchEuroRate() {
 }
 
 // ============================================
+// HERO COUNTDOWN
+// ============================================
+
+function initCountdown() {
+    const countdownEl = document.getElementById('heroCountdown');
+    if (!countdownEl) return;
+
+    // Venezuela is UTC−4 year-round (no DST)
+    // Event starts: Aug 24, 2026 00:00 VET  →  2026-08-24T04:00:00Z
+    // Event ends:   Aug 28, 2026 23:59 VET  →  hide on Aug 29 00:00 VET = 2026-08-29T04:00:00Z
+    const eventStart = new Date('2026-08-24T04:00:00Z');
+    const eventEnd   = new Date('2026-08-29T04:00:00Z');
+
+    let intervalId = null;
+
+    function pad(n) {
+        return String(n).padStart(2, '0');
+    }
+
+    function renderCountdown(ms) {
+        const totalSec = Math.max(0, Math.floor(ms / 1000));
+        const days    = Math.floor(totalSec / 86400);
+        const hours   = Math.floor((totalSec % 86400) / 3600);
+        const minutes = Math.floor((totalSec % 3600) / 60);
+        const seconds = totalSec % 60;
+
+        countdownEl.innerHTML = `
+            <div class="countdown-wrapper">
+                <p class="countdown-label">Faltan para el campamento</p>
+                <div class="countdown-grid">
+                    <div class="countdown-unit">
+                        <span class="countdown-value">${pad(days)}</span>
+                        <span class="countdown-unit-label">días</span>
+                    </div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit">
+                        <span class="countdown-value">${pad(hours)}</span>
+                        <span class="countdown-unit-label">horas</span>
+                    </div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit">
+                        <span class="countdown-value">${pad(minutes)}</span>
+                        <span class="countdown-unit-label">minutos</span>
+                    </div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit">
+                        <span class="countdown-value">${pad(seconds)}</span>
+                        <span class="countdown-unit-label">segundos</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderCamping() {
+        countdownEl.innerHTML = `
+            <div class="countdown-camping">
+                <span class="countdown-camping-icon">⛺</span>
+                <p class="countdown-camping-text">¡Estamos de campamento!</p>
+            </div>
+        `;
+    }
+
+    function tick() {
+        const now = new Date();
+
+        if (now >= eventEnd) {
+            // Camp is over — hide silently
+            countdownEl.style.display = 'none';
+            if (intervalId) clearInterval(intervalId);
+            return;
+        }
+
+        if (now >= eventStart) {
+            // Aug 24–28: camping message (static, no need to tick every second)
+            renderCamping();
+            if (intervalId) clearInterval(intervalId);
+            return;
+        }
+
+        // Before Aug 24: live countdown
+        renderCountdown(eventStart - now);
+    }
+
+    tick();
+    intervalId = setInterval(tick, 1000);
+}
+
+// ============================================
 // SCROLL ANIMATIONS
 // ============================================
 const observerOptions = {
@@ -228,6 +317,7 @@ document.querySelectorAll('.fade-in').forEach(el => {
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
     renderFAQ();
+    initCountdown();
 
     // Fetch live euro rate and populate badge + calculator
     fetchEuroRate();
