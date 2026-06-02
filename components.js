@@ -17,7 +17,7 @@
     // To add a new nav entry, append one object here — no HTML to touch.
     const NAV_ITEMS = [
         { href: `${idxPrefix}#home`,            label: 'Inicio',      activeFile: 'index.html',       isAnchor: true },
-        { href: `${idxPrefix}#registration`,    label: 'Inscribirme', activeFile: 'index.html',       isAnchor: true },
+        { href: 'https://docs.google.com/forms/d/e/1FAIpQLSfiJoNvwPer5zCyQQHRjPz2hSFAqCRCx5FT6Ea9flY4GWRAHQ/viewform', label: 'Inscribirme', activeFile: '', isAnchor: false, external: true },
         { href: `${idxPrefix}#payment`,         label: 'Inversión',   activeFile: 'index.html',       isAnchor: true },
         { href: 'pagos.html',                   label: 'Reportar Pago', activeFile: 'pagos.html',     isAnchor: false },
         { href: 'donaciones.html',              label: 'Donaciones',  activeFile: 'donaciones.html',  isAnchor: false },
@@ -36,12 +36,15 @@
     const headerEl = document.querySelector('header');
     if (headerEl) {
         const liItems = NAV_ITEMS
-            .map(item => `<li><a href="${item.href}"${getActiveAttr(item)}>${item.label}</a></li>`)
+            .map(item => {
+                const ext = item.external ? ' target="_blank" rel="noopener noreferrer"' : '';
+                return `<li><a href="${item.href}"${getActiveAttr(item)}${ext}>${item.label}</a></li>`;
+            })
             .join('\n                ');
 
         headerEl.innerHTML = `
         <nav class="container">
-            <div class="logo">PVJ 2026</div>
+            <a href="https://pvjcampamento.com/" class="logo">PVJ 2026</a>
             <ul class="nav-links" id="navLinks">
                 ${liItems}
             </ul>
