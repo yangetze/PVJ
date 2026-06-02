@@ -314,6 +314,12 @@ document.addEventListener('DOMContentLoaded', () => {
     renderFAQ();
     initCountdown();
 
+    // Wire inscription URL to "Registrarme Ahora" CTA
+    const registrarmeBtn = document.getElementById('registrarmeBtn');
+    if (registrarmeBtn) {
+        registrarmeBtn.href = INSCRIPTION_URL;
+    }
+
     // Fetch live euro rate and populate badge + calculator
     fetchEuroRate();
 
