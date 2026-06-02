@@ -320,6 +320,12 @@ document.addEventListener('DOMContentLoaded', () => {
         registrarmeBtn.href = INSCRIPTION_URL;
     }
 
+    // Wire WhatsApp URL to "Estoy interesado" CTA
+    const interestedBtn = document.getElementById('interestedBtn');
+    if (interestedBtn) {
+        interestedBtn.href = WHATSAPP_URL;
+    }
+
     // Fetch live euro rate and populate badge + calculator
     fetchEuroRate();
 
