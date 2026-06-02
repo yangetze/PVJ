@@ -1,4 +1,4 @@
-# Marca — PVJ In-Cómodamente 2026
+# Marca — PVJ In-Cómoda-Mente 2026
 
 ## Colores
 
