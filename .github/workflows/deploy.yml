@@ -19,8 +19,13 @@ jobs:
 
       - name: Deploy via SCP
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" scp \
-            -P ${{ secrets.SSH_PORT }} \
-            -o StrictHostKeyChecking=no \
-            index.html calculadora.html donaciones.html styles.css components.js main.js donaciones.js .htaccess \
-            ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:~/domains/pvjcampamento.com/public_html/
+          for i in 1 2 3; do
+            sshpass -p "${{ secrets.SSH_PASSWORD }}" scp \
+              -P ${{ secrets.SSH_PORT }} \
+              -o StrictHostKeyChecking=no \
+              -o ConnectTimeout=30 \
+              -o ServerAliveInterval=15 \
+              index.html calculadora.html donaciones.html styles.css components.js main.js donaciones.js .htaccess \
+              ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:~/domains/pvjcampamento.com/public_html/ \
+            && break || { echo "Attempt $i failed, retrying in 15s..."; sleep 15; }
+          done
