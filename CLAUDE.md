@@ -29,6 +29,9 @@ PVJ/
 ├── components.js     # Shared header (nav) + footer — SINGLE SOURCE OF TRUTH
 ├── main.js           # index.html & calculadora.html JS: FAQ, countdown, BCV, calculator
 ├── donaciones.js     # donaciones.html JS: donations FAQ, scroll animations
+├── assets/
+│   ├── favicon.ico   # Browser tab icon — linked in every HTML page
+│   └── logo.png      # Nav logo image — replaces "Inicio" text in the nav
 ├── docs/
 │   └── brand.md      # Brand guidelines: colors, tone of voice, copy examples
 └── CLAUDE.md         # This file
@@ -60,10 +63,14 @@ Every `.html` file must load scripts in this exact order just before `</body>`:
 ### Adding a new page
 
 1. Create `newpage.html` with standard `<head>` (linking `styles.css`).
-2. Add an empty `<header></header>` near the top of `<body>`.
-3. Add an empty `<footer></footer>` near the bottom of `<body>`.
-4. Load `components.js` (then your page-specific script) just before `</body>`.
-5. Add the new page's nav entry to `NAV_ITEMS` in `components.js` — that's the **only** place to touch for nav/footer changes.
+2. **Add the favicon link in `<head>`** — every HTML page must include:
+   ```html
+   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+   ```
+3. Add an empty `<header></header>` near the top of `<body>`.
+4. Add an empty `<footer></footer>` near the bottom of `<body>`.
+5. Load `components.js` (then your page-specific script) just before `</body>`.
+6. Add the new page's nav entry to `NAV_ITEMS` in `components.js` — that's the **only** place to touch for nav/footer changes.
 
 > **Deployment:** `.github/workflows/deploy.yml` uses `rsync` and deploys the entire repo (excluding `CLAUDE.md`, `docs/`, `.github/`, and `.git`). New pages are picked up automatically — **no changes to `deploy.yml` needed** when adding or removing pages. Only update `deploy.yml` if the excluded paths change or the hosting configuration changes.
 
@@ -218,6 +225,7 @@ The aesthetic is **dark-themed and tech/neon**, with gradient text, `backdrop-fi
 - **Event timestamps use VET (UTC−4)** — Venezuela does not observe DST. Timestamps in `main.js` are expressed as UTC equivalents (e.g. `2026-08-24T04:00:00Z` = Aug 24 midnight VET).
 - **The BCV API response shape is unreliable** — `fetchEuroRate()` probes multiple keys (`data.current.eur`, `data.eur`, `data.EUR`, `data.rates.eur`, etc.) because the third-party endpoint occasionally changes structure. Maintain this defensive pattern if the API call is ever modified.
 - **External links always open in a new tab** — any `<a>` pointing to an external URL (not a same-site page or anchor) must include `target="_blank" rel="noopener noreferrer"`. This applies to social media links, Google Forms, maps, and any third-party URLs.
+- **Every HTML page must include the favicon** — add `<link rel="icon" type="image/x-icon" href="assets/favicon.ico">` in the `<head>` of every `.html` file.
 
 ## Brand & Copy Guidelines
 
