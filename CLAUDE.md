@@ -209,6 +209,7 @@ The aesthetic is **dark-themed and tech/neon**, with gradient text, `backdrop-fi
 - **Content language is Spanish (es-VE)** — the `<html lang="es">` attribute is set and all user-visible copy is in Venezuelan Spanish. Number formatting uses `toLocaleString('es-VE')`.
 - **Event timestamps use VET (UTC−4)** — Venezuela does not observe DST. Timestamps in `main.js` are expressed as UTC equivalents (e.g. `2026-08-24T04:00:00Z` = Aug 24 midnight VET).
 - **The BCV API response shape is unreliable** — `fetchEuroRate()` probes multiple keys (`data.current.eur`, `data.eur`, `data.EUR`, `data.rates.eur`, etc.) because the third-party endpoint occasionally changes structure. Maintain this defensive pattern if the API call is ever modified.
+- **External links always open in a new tab** — any `<a>` pointing to an external URL (not a same-site page or anchor) must include `target="_blank" rel="noopener noreferrer"`. This applies to social media links, Google Forms, maps, and any third-party URLs.
 
 ## Brand & Copy Guidelines
 

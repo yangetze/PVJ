@@ -19,7 +19,7 @@
         { href: `${idxPrefix}#home`,            label: 'Inicio',      activeFile: 'index.html',       isAnchor: true },
         { href: `${idxPrefix}#interested-form`, label: 'Interesado',  activeFile: 'index.html',       isAnchor: true },
         { href: `${idxPrefix}#registration`,    label: 'Registro',    activeFile: 'index.html',       isAnchor: true },
-        { href: `${idxPrefix}#payment`,         label: 'Pago',        activeFile: 'index.html',       isAnchor: true },
+        { href: `${idxPrefix}#payment`,         label: 'Costo',       activeFile: 'index.html',       isAnchor: true },
         { href: 'pagos.html',                   label: 'Pagos',       activeFile: 'pagos.html',       isAnchor: false },
         { href: 'donaciones.html',              label: 'Donaciones',  activeFile: 'donaciones.html',  isAnchor: false },
     ];
