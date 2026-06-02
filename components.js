@@ -19,8 +19,8 @@
         { href: `${idxPrefix}#home`,            label: 'Inicio',      activeFile: 'index.html',       isAnchor: true },
         { href: `${idxPrefix}#interested-form`, label: 'Interesado',  activeFile: 'index.html',       isAnchor: true },
         { href: `${idxPrefix}#registration`,    label: 'Registro',    activeFile: 'index.html',       isAnchor: true },
-        { href: `${idxPrefix}#payment`,         label: 'Costo',       activeFile: 'index.html',       isAnchor: true },
-        { href: 'pagos.html',                   label: 'Pagos',       activeFile: 'pagos.html',       isAnchor: false },
+        { href: `${idxPrefix}#payment`,         label: 'Inversión',   activeFile: 'index.html',       isAnchor: true },
+        { href: 'pagos.html',                   label: 'Reportar Pago', activeFile: 'pagos.html',     isAnchor: false },
         { href: 'donaciones.html',              label: 'Donaciones',  activeFile: 'donaciones.html',  isAnchor: false },
     ];
 
@@ -90,7 +90,7 @@
                         <li><a href="${idxPrefix}#interested-form">Formulario de Interesado</a></li>
                         <li><a href="${idxPrefix}#registration">Registro</a></li>
                         <li><a href="${idxPrefix}#payment">Información de Pago</a></li>
-                        <li><a href="pagos.html">Pagos</a></li>
+                        <li><a href="pagos.html">Reportar Pago</a></li>
                         <li><a href="donaciones.html">Donaciones</a></li>
                     </ul>
                 </div>
