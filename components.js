@@ -98,7 +98,7 @@
                 <div class="footer-section">
                     <h3>Contacto</h3>
                     <p>Email: <a href="mailto:contacto@pvjcampamento.com">contacto@pvjcampamento.com</a></p>
-                    <p>Teléfono: <a href="tel:+58000000000">+58 (0) 000-0000</a></p>
+                    <p>WhatsApp: <a href="${WHATSAPP_URL}" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a></p>
                     <p>Ubicación: <a href="https://maps.app.goo.gl/31Uu8S2GkfhWCuca9" target="_blank" rel="noopener noreferrer">Calle Urdaneta con Av. Eugenio Mendoza, Condominio Renaissance La Castellana.</a></p>
                 </div>
                 <div class="footer-section">
