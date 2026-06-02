@@ -15,17 +15,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install sshpass
-        run: sudo apt-get install -y sshpass
+        run: sudo apt-get install -y sshpass rsync
 
-      - name: Deploy via SCP
+      - name: Deploy via rsync
         run: |
           for i in 1 2 3; do
-            sshpass -p "${{ secrets.SSH_PASSWORD }}" scp \
-              -P ${{ secrets.SSH_PORT }} \
-              -o StrictHostKeyChecking=no \
-              -o ConnectTimeout=30 \
-              -o ServerAliveInterval=15 \
-              index.html calculadora.html donaciones.html styles.css components.js main.js donaciones.js .htaccess \
-              ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:~/domains/pvjcampamento.com/public_html/ \
+            sshpass -p "${{ secrets.SSH_PASSWORD }}" rsync \
+              -avz --delete \
+              -e "ssh -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no -o ConnectTimeout=30 -o ServerAliveInterval=15" \
+              --exclude='.git*' \
+              --exclude='CLAUDE.md' \
+              --exclude='docs/' \
+              --exclude='.github/' \
+              ./ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:~/domains/pvjcampamento.com/public_html/ \
             && break || { echo "Attempt $i failed, retrying in 15s..."; sleep 15; }
           done
