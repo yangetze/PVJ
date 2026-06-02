@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos — PVJ 2026 | In-Cómodamente</title>
+    <meta name="description" content="Calcula el costo en bolívares y reporta tu pago de inscripción al Campamento PVJ 2026 - In-Cómodamente.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- HEADER & NAVIGATION — rendered by components.js -->
+    <header></header>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">Pagos de Inscripción</h1>
+            <p class="page-hero-subtitle">Calcula cuánto es en bolívares y reporta tu pago en un solo lugar.</p>
+        </div>
+    </section>
+
+    <!-- CALCULATOR SECTION -->
+    <section class="pagos-calculator-section" id="calculadora">
+        <div class="container">
+            <div class="pagos-section-header">
+                <h2>¿Cuánto es en bolívares?</h2>
+                <p>Usa la tasa BCV del día para saber el equivalente exacto antes de pagar.</p>
+            </div>
+
+            <div class="calculator-card pagos-calculator-card">
+                <div class="calculator-header">
+                    <h3 class="calculator-title">💱 Calculadora de Pago en Bolívares</h3>
+                    <p class="calculator-subtitle">Convierte euros a Bs. según la Tasa Euro BCV de hoy</p>
+                </div>
+                <div class="calculator-body">
+                    <div class="calculator-input-group">
+                        <label class="calculator-label" for="euroInput">Monto en Euros</label>
+                        <div class="calculator-input-wrapper">
+                            <span class="calculator-currency-symbol">€</span>
+                            <input type="number" id="euroInput" class="calculator-input" value="95" min="0" step="1" placeholder="95">
+                        </div>
+                    </div>
+                    <div class="calculator-arrow" aria-hidden="true">→</div>
+                    <div class="calculator-output-group">
+                        <label class="calculator-label">Equivalente en Bolívares</label>
+                        <div class="calculator-result">
+                            <span class="calculator-result-currency">Bs.</span>
+                            <span class="calculator-result-value" id="bsResultValue">—</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="calculator-note" id="calculatorNote">
+                    <span class="calculator-note-icon">⏳</span>
+                    <span>Obteniendo tasa BCV del día…</span>
+                </div>
+            </div>
+
+            <p class="pagos-bcv-disclaimer">
+                La tasa mostrada es informativa y se actualiza con los datos del BCV. El monto exacto al momento de tu transferencia puede variar ligeramente.
+            </p>
+        </div>
+    </section>
+
+    <!-- PAYMENT REPORT SECTION -->
+    <section class="pagos-report-section" id="reportar">
+        <div class="container">
+            <div class="pagos-section-header">
+                <h2>Reporta tu pago</h2>
+                <p>Una vez que hayas realizado el pago, completa el formulario para que podamos registrarlo.</p>
+            </div>
+
+            <!-- WHAT YOU NEED CARDS -->
+            <div class="pagos-methods-grid">
+
+                <!-- BOLÍVARES -->
+                <div class="pagos-method-card">
+                    <div class="pagos-method-badge pagos-method-badge--bs">Bs.</div>
+                    <h3>Pago en Bolívares</h3>
+                    <p class="pagos-method-label">Pago Móvil o Transferencia Bancaria</p>
+                    <ul class="pagos-checklist">
+                        <li>
+                            <span class="pagos-check">✓</span>
+                            <span><strong>Número de referencia</strong> — los últimos 6 dígitos de la operación</span>
+                        </li>
+                        <li>
+                            <span class="pagos-check">✓</span>
+                            <span><strong>Comprobante</strong> — captura de pantalla o foto del recibo</span>
+                        </li>
+                        <li>
+                            <span class="pagos-check">✓</span>
+                            <span><strong>Nombre del pagador</strong> — tal como aparece en el banco</span>
+                        </li>
+                        <li>
+                            <span class="pagos-check">✓</span>
+                            <span><strong>¿A quién cubre el pago?</strong> — nombre del o los campistas</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- DÓLARES -->
+                <div class="pagos-method-card">
+                    <div class="pagos-method-badge pagos-method-badge--usd">$</div>
+                    <h3>Pago en Dólares</h3>
+                    <p class="pagos-method-label">Zelle · PayPal · Binance · Efectivo · Otro</p>
+                    <ul class="pagos-checklist">
+                        <li>
+                            <span class="pagos-check">✓</span>
+                            <span><strong>Plataforma usada</strong> — Zelle, PayPal, Binance, efectivo, etc.</span>
+                        </li>
+                        <li>
+                            <span class="pagos-check">✓</span>
+                            <span><strong>Número de confirmación</strong> — código alfanumérico de la transacción</span>
+                        </li>
+                        <li>
+                            <span class="pagos-check">✓</span>
+                            <span><strong>Comprobante</strong> — captura de pantalla o foto del recibo</span>
+                        </li>
+                        <li>
+                            <span class="pagos-check">✓</span>
+                            <span><strong>¿A quién cubre el pago?</strong> — nombre del o los campistas</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- INSTALLMENTS NOTE -->
+            <div class="pagos-installments-note">
+                <span class="pagos-installments-icon">💡</span>
+                <div>
+                    <strong>¿Pago en cuotas?</strong> No hay problema. Puedes reportar cada cuota por separado usando el mismo formulario. Indica en el campo de observaciones si es una cuota parcial y el monto total que planeas pagar.
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="pagos-cta">
+                <p class="pagos-cta-hint">Ten el comprobante a mano antes de abrir el formulario.</p>
+                <a
+                    href="GOOGLE_FORM_URL_AQUI"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-primary pagos-form-btn"
+                    id="reportPaymentBtn"
+                >
+                    Reportar mi pago →
+                </a>
+                <p class="pagos-cta-note">Se abre en una pestaña nueva · Tiempo estimado: 2 minutos</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER — rendered by components.js -->
+    <footer></footer>
+
+    <script src="components.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
