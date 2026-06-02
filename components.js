@@ -13,9 +13,6 @@
     // Same-page anchors on index.html; cross-page links everywhere else.
     const idxPrefix = isIndex ? '' : 'index.html';
 
-    // ── Site-wide URLs ────────────────────────────────────────────────────────
-    const INSCRIPTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfiJoNvwPer5zCyQQHRjPz2hSFAqCRCx5FT6Ea9flY4GWRAHQ/viewform';
-
     // ── Navigation items ──────────────────────────────────────────────────────
     // To add a new nav entry, append one object here — no HTML to touch.
     const NAV_ITEMS = [
@@ -47,7 +44,7 @@
 
         headerEl.innerHTML = `
         <nav class="container">
-            <a href="https://pvjcampamento.com/" class="logo">PVJ 2026</a>
+            <a href="${SITE_URL}" class="logo">PVJ 2026</a>
             <ul class="nav-links" id="navLinks">
                 ${liItems}
             </ul>

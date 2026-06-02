@@ -40,6 +40,7 @@ The project follows strict separation of concerns:
 |---|---|
 | `*.html` | Page content only — no inline styles, scripts, nav, or footer HTML |
 | `styles.css` | All CSS: design system variables, layout, components, responsive breakpoints |
+| `config.js` | **Site-wide constants** (`SITE_URL`, `INSCRIPTION_URL`, etc.) — single source of truth |
 | `components.js` | **Shared header + footer** — rendered into every page; also owns hamburger logic |
 | `main.js` | index.html / calculadora.html JS: FAQ data + rendering, countdown, BCV rate, calculator |
 | `donaciones.js` | donaciones.html JS: donations FAQ data + rendering, scroll animations |
@@ -49,11 +50,12 @@ The project follows strict separation of concerns:
 Every `.html` file must load scripts in this exact order just before `</body>`:
 
 ```html
-<script src="components.js"></script>   <!-- always first — renders <header> and <footer> -->
+<script src="config.js"></script>       <!-- always first — exposes site-wide constants -->
+<script src="components.js"></script>   <!-- always second — renders <header> and <footer> -->
 <script src="main.js"></script>          <!-- or donaciones.js for the donations page -->
 ```
 
-`components.js` runs synchronously and populates the empty `<header></header>` and `<footer></footer>` placeholders before any page-specific script runs.
+`config.js` runs first and exposes global constants used by all other scripts. `components.js` runs synchronously and populates the empty `<header></header>` and `<footer></footer>` placeholders before any page-specific script runs.
 
 ### Adding a new page
 

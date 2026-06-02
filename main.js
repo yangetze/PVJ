@@ -1,9 +1,4 @@
 // ============================================
-// SITE-WIDE URLS
-// ============================================
-const INSCRIPTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfiJoNvwPer5zCyQQHRjPz2hSFAqCRCx5FT6Ea9flY4GWRAHQ/viewform';
-
-// ============================================
 // FAQ DATA
 // ============================================
 const faqData = [
