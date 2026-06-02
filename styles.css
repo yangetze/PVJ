@@ -1144,29 +1144,82 @@ nav {
     margin-bottom: var(--spacing-xl);
 }
 
+/* Card base */
 .pagos-method-card {
     background: var(--bg-secondary);
     border: 1px solid var(--border-subtle);
     border-radius: 16px;
     padding: var(--spacing-xl);
-    transition: border-color var(--transition-normal), transform var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+/* Colored top accent bar */
+.pagos-method-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 16px 16px 0 0;
+}
+
+.pagos-method-card--bs::before {
+    background: linear-gradient(90deg, var(--accent-lime), var(--accent-lime-bright));
+}
+
+.pagos-method-card--usd::before {
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-blue-bright));
+}
+
+/* Subtle background glow */
+.pagos-method-card--bs::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(178, 223, 20, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.pagos-method-card--usd::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(0, 229, 255, 0.06) 0%, transparent 70%);
+    pointer-events: none;
 }
 
 .pagos-method-card:hover {
-    border-color: var(--border-active);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Card header: badge + title + tags side by side */
+.pagos-method-header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
 }
 
 .pagos-method-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    font-size: 1.25rem;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    font-size: 1.1rem;
     font-weight: 800;
-    margin-bottom: var(--spacing-md);
+    flex-shrink: 0;
 }
 
 .pagos-method-badge--bs {
@@ -1182,49 +1235,89 @@ nav {
 }
 
 .pagos-method-card h3 {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: var(--spacing-xs);
+    line-height: var(--line-height-tight);
 }
 
-.pagos-method-label {
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-    margin-bottom: var(--spacing-md);
-    font-weight: 500;
+/* Platform tags row */
+.pagos-platform-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.pagos-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
     letter-spacing: 0.03em;
 }
 
+.pagos-tag--bs {
+    background: rgba(178, 223, 20, 0.1);
+    color: var(--accent-lime);
+    border: 1px solid rgba(178, 223, 20, 0.25);
+}
+
+.pagos-tag--usd {
+    background: rgba(0, 229, 255, 0.08);
+    color: var(--accent-blue-bright);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+/* Checklist */
 .pagos-checklist {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: 10px;
 }
 
 .pagos-checklist li {
     display: flex;
     gap: var(--spacing-sm);
     align-items: flex-start;
-    font-size: 0.92rem;
+    background: var(--bg-tertiary);
+    border-radius: 10px;
+    padding: 10px 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.pagos-checklist-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+    width: 22px;
+    text-align: center;
+}
+
+.pagos-checklist li div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.pagos-checklist li strong {
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    display: block;
+}
+
+.pagos-checklist li span {
+    font-size: 0.8rem;
     color: var(--text-secondary);
     line-height: var(--line-height-normal);
 }
 
-.pagos-checklist li strong {
-    color: var(--text-primary);
-}
-
-.pagos-check {
-    color: var(--accent-lime);
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 1px;
-}
-
+/* Installments note */
 .pagos-installments-note {
     display: flex;
     gap: var(--spacing-md);
@@ -1249,14 +1342,18 @@ nav {
     margin-top: 2px;
 }
 
+/* CTA — flex column so items never overlap */
 .pagos-cta {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
 }
 
 .pagos-cta-hint {
     font-size: 0.9rem;
     color: var(--text-secondary);
-    margin-bottom: var(--spacing-md);
+    margin: 0;
 }
 
 .pagos-form-btn {
@@ -1266,10 +1363,10 @@ nav {
 }
 
 .pagos-cta-note {
-    margin-top: var(--spacing-sm);
     font-size: 0.8rem;
     color: var(--text-secondary);
     opacity: 0.6;
+    margin: 0;
 }
 
 @media (max-width: 768px) {
