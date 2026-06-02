@@ -14,12 +14,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
       - name: Deploy via SCP
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          source: "index.html,calculadora.html,donaciones.html,styles.css,components.js,main.js,donaciones.js"
-          target: "public_html"
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" scp \
+            -P ${{ secrets.SSH_PORT }} \
+            -o StrictHostKeyChecking=no \
+            index.html calculadora.html donaciones.html styles.css components.js main.js donaciones.js \
+            ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:public_html/
