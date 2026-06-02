@@ -16,7 +16,7 @@
     // ── Navigation items ──────────────────────────────────────────────────────
     // To add a new nav entry, append one object here — no HTML to touch.
     const NAV_ITEMS = [
-        { href: `${idxPrefix}#home`,  label: '<img src="assets/logo.png" alt="Inicio" class="nav-logo-img">', activeFile: 'index.html', isAnchor: true },
+        { href: `${idxPrefix}#home`,  label: 'Inicio', activeFile: 'index.html', isAnchor: true },
         { href: INSCRIPTION_URL,      label: 'Inscribirme', activeFile: '',                 isAnchor: false, external: true },
         { href: `${idxPrefix}#payment`,         label: 'Inversión',   activeFile: 'index.html',       isAnchor: true },
         { href: 'pagos.html',                   label: 'Reportar Pago', activeFile: 'pagos.html',     isAnchor: false },
