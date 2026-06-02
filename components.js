@@ -13,11 +13,14 @@
     // Same-page anchors on index.html; cross-page links everywhere else.
     const idxPrefix = isIndex ? '' : 'index.html';
 
+    // ── Site-wide URLs ────────────────────────────────────────────────────────
+    const INSCRIPTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfiJoNvwPer5zCyQQHRjPz2hSFAqCRCx5FT6Ea9flY4GWRAHQ/viewform';
+
     // ── Navigation items ──────────────────────────────────────────────────────
     // To add a new nav entry, append one object here — no HTML to touch.
     const NAV_ITEMS = [
-        { href: `${idxPrefix}#home`,            label: 'Inicio',      activeFile: 'index.html',       isAnchor: true },
-        { href: 'https://docs.google.com/forms/d/e/1FAIpQLSfiJoNvwPer5zCyQQHRjPz2hSFAqCRCx5FT6Ea9flY4GWRAHQ/viewform', label: 'Inscribirme', activeFile: '', isAnchor: false, external: true },
+        { href: `${idxPrefix}#home`,  label: 'Inicio',      activeFile: 'index.html',       isAnchor: true },
+        { href: INSCRIPTION_URL,      label: 'Inscribirme', activeFile: '',                 isAnchor: false, external: true },
         { href: `${idxPrefix}#payment`,         label: 'Inversión',   activeFile: 'index.html',       isAnchor: true },
         { href: 'pagos.html',                   label: 'Reportar Pago', activeFile: 'pagos.html',     isAnchor: false },
         { href: 'donaciones.html',              label: 'Donaciones',  activeFile: 'donaciones.html',  isAnchor: false },
