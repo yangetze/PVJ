@@ -342,6 +342,14 @@ nav {
     animation: fadeInUp 1s ease-out;
 }
 
+.hero-logo {
+    max-width: 420px;
+    width: 90%;
+    height: auto;
+    margin: 0 auto var(--spacing-md);
+    display: block;
+}
+
 .hero-title {
     font-size: clamp(2.2rem, 7vw, 5.5rem);
     font-weight: 800;
