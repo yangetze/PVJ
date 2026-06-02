@@ -63,6 +63,12 @@ Every `.html` file must load scripts in this exact order just before `</body>`:
 4. Load `components.js` (then your page-specific script) just before `</body>`.
 5. Add the new page's nav entry to `NAV_ITEMS` in `components.js` — that's the **only** place to touch for nav/footer changes.
 
+> **Deployment:** `.github/workflows/deploy.yml` uses `rsync` and deploys the entire repo (excluding `CLAUDE.md`, `docs/`, `.github/`, and `.git`). New pages are picked up automatically — **no changes to `deploy.yml` needed** when adding or removing pages. Only update `deploy.yml` if the excluded paths change or the hosting configuration changes.
+
+### Removing a page
+
+Delete the `.html` file and its page-specific `.js` file (if any). Remove its entry from `NAV_ITEMS` in `components.js`. The next deploy will automatically remove it from the server (`rsync --delete` is active).
+
 ### Modifying the shared nav or footer
 
 **Only edit `components.js`.** Never copy nav/footer HTML into an individual page. Changes in `components.js` propagate to every page automatically.
