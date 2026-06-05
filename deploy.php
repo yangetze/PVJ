@@ -7,8 +7,14 @@
  * value stored in the GitHub Actions secret DEPLOY_SECRET.
  */
 
-define('DEPLOY_SECRET', getenv('DEPLOY_SECRET') ?: 'REPLACE_WITH_YOUR_SECRET');
-define('REPO_PATH',     '/home/u626147236/domains/pvjcampamento.com/public_html'); // update with your Hostinger username
+// Secret lives in deploy-config.php (excluded from git, created manually on the server)
+if (file_exists(__DIR__ . '/deploy-config.php')) {
+    require __DIR__ . '/deploy-config.php';
+} else {
+    http_response_code(500);
+    exit('deploy-config.php not found');
+}
+// DEPLOY_SECRET and REPO_PATH are defined in deploy-config.php
 
 // Verify signature
 $signature = $_SERVER['HTTP_X_HUB_SIGNATURE_256'] ?? '';
