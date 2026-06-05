@@ -1,5 +1,15 @@
 name: Deploy to Hostinger
 
+# Deployment uses a GitHub Webhook + deploy.php approach instead of SSH/rsync.
+# When a push to main occurs, GitHub calls https://pvjcampamento.com/deploy.php
+# with a signed payload. deploy.php verifies the signature and runs `git pull`.
+# This avoids SSH firewall issues on shared hosting — only port 443 (HTTPS) is needed.
+#
+# Required GitHub secret:
+#   DEPLOY_SECRET — a random string used to sign the webhook payload (set in
+#                   GitHub → Settings → Secrets → Actions, and in Hostinger's
+#                   deploy.php or as a server env var)
+
 on:
   push:
     branches:
@@ -7,26 +17,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  notify:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install sshpass
-        run: sudo apt-get install -y sshpass rsync
-
-      - name: Deploy via rsync
+      - name: Trigger deploy webhook
         run: |
+          PAYLOAD='{"ref":"refs/heads/main"}'
+          SIGNATURE="sha256=$(echo -n "$PAYLOAD" | openssl dgst -sha256 -hmac "${{ secrets.DEPLOY_SECRET }}" | sed 's/.*= //')"
           for i in 1 2 3; do
-            sshpass -p "${{ secrets.SSH_PASSWORD }}" rsync \
-              -avz --delete \
-              -e "ssh -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no -o ConnectTimeout=30 -o ServerAliveInterval=15" \
-              --exclude='.git*' \
-              --exclude='CLAUDE.md' \
-              --exclude='docs/' \
-              --exclude='.github/' \
-              ./ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:~/domains/pvjcampamento.com/public_html/ \
-            && break || { echo "Attempt $i failed, retrying in 15s..."; sleep 15; }
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+              https://pvjcampamento.com/deploy.php \
+              -H "Content-Type: application/json" \
+              -H "X-Hub-Signature-256: $SIGNATURE" \
+              -d "$PAYLOAD")
+            echo "Attempt $i — HTTP $STATUS"
+            if [ "$STATUS" = "200" ]; then
+              echo "Deploy triggered successfully."
+              break
+            fi
+            echo "Unexpected status $STATUS, retrying in 15s..."
+            sleep 15
           done
+          [ "$STATUS" = "200" ] || { echo "All attempts failed."; exit 1; }
