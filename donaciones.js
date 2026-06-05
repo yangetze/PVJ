@@ -125,6 +125,21 @@ document.addEventListener('DOMContentLoaded', () => {
         waBtn.href = WHATSAPP_DONACIONES_URL;
     }
 
+    const waZelle = document.getElementById('whatsappZelleBtn');
+    if (waZelle && typeof WHATSAPP_ZELLE_URL !== 'undefined') {
+        waZelle.href = WHATSAPP_ZELLE_URL;
+    }
+
+    const waPagoMovil = document.getElementById('whatsappPagoMovilBtn');
+    if (waPagoMovil && typeof WHATSAPP_PAGO_MOVIL_URL !== 'undefined') {
+        waPagoMovil.href = WHATSAPP_PAGO_MOVIL_URL;
+    }
+
+    const waTransferencia = document.getElementById('whatsappTransferenciaBtn');
+    if (waTransferencia && typeof WHATSAPP_TRANSFERENCIA_URL !== 'undefined') {
+        waTransferencia.href = WHATSAPP_TRANSFERENCIA_URL;
+    }
+
     // Smooth scroll for internal anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {

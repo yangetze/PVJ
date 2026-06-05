@@ -3034,6 +3034,10 @@ a:focus {
     margin-top: var(--spacing-md);
 }
 
+.donation-method-card .donation-wa-btn + .donation-wa-btn {
+    margin-top: var(--spacing-xs);
+}
+
 /* ============================================
    DONATIONS PAGE — FINAL CTA
    ============================================ */

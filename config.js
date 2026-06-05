@@ -13,3 +13,12 @@ const WHATSAPP_URL     = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURICompo
 const WHATSAPP_DONACIONES_NUMBER  = '584242851050'; // donations contact
 const WHATSAPP_DONACIONES_MESSAGE = 'Estoy interesado en DONAR para Plan Vacacional Juvenil.';
 const WHATSAPP_DONACIONES_URL     = `https://wa.me/${WHATSAPP_DONACIONES_NUMBER}?text=${encodeURIComponent(WHATSAPP_DONACIONES_MESSAGE)}`;
+
+const WHATSAPP_ZELLE_MESSAGE      = '¡Hola! Quiero ayudar a completar una beca por Zelle. ¿Me facilitan los datos?';
+const WHATSAPP_ZELLE_URL          = `https://wa.me/${WHATSAPP_DONACIONES_NUMBER}?text=${encodeURIComponent(WHATSAPP_ZELLE_MESSAGE)}`;
+
+const WHATSAPP_PAGO_MOVIL_MESSAGE = '¡Hola! Quiero ayudar a completar una beca por Pago Móvil. ¿Me facilitan los datos?';
+const WHATSAPP_PAGO_MOVIL_URL     = `https://wa.me/${WHATSAPP_DONACIONES_NUMBER}?text=${encodeURIComponent(WHATSAPP_PAGO_MOVIL_MESSAGE)}`;
+
+const WHATSAPP_TRANSFERENCIA_MESSAGE = '¡Hola! Quiero ayudar a completar una beca por Transferencia Bancaria. ¿Me facilitan los datos?';
+const WHATSAPP_TRANSFERENCIA_URL     = `https://wa.me/${WHATSAPP_DONACIONES_NUMBER}?text=${encodeURIComponent(WHATSAPP_TRANSFERENCIA_MESSAGE)}`;
