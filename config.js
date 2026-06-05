@@ -9,3 +9,7 @@ const INSCRIPTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfiJoNvwPer5zC
 const WHATSAPP_NUMBER  = '584126152997'; // phone number in international format, no + or spaces
 const WHATSAPP_MESSAGE = 'Hola estoy interesado para inscripción del campamento.';
 const WHATSAPP_URL     = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
+const WHATSAPP_DONACIONES_NUMBER  = '584126152997'; // update with donations contact number
+const WHATSAPP_DONACIONES_MESSAGE = 'Estoy interesado en planes de donaciones mensuales/quincenales del PVJ';
+const WHATSAPP_DONACIONES_URL     = `https://wa.me/${WHATSAPP_DONACIONES_NUMBER}?text=${encodeURIComponent(WHATSAPP_DONACIONES_MESSAGE)}`;
