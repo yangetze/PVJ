@@ -1,6 +1,13 @@
 # Hostinger Deployment Setup
 
-Deployment works via **GitHub Webhook → deploy.php**. When a push lands on `main`, GitHub Actions calls `https://pvjcampamento.com/deploy.php` over HTTPS. The script verifies a shared secret and runs `git pull origin main` on the server. No SSH ports need to be open.
+Deployment works via **GitHub Webhook → deploy.php**. When a push lands on `main`, GitHub Actions calls `https://pvjcampamento.com/deploy.php` over HTTPS. The script verifies a shared secret, runs `git pull` in a private directory outside `public_html`, then rsyncs only the public web files into `public_html`.
+
+This means `.gitignore`, `CLAUDE.md`, `docs/`, `deploy.php`, `*.md`, and other non-web files are **never visible** on the live site.
+
+```
+~/pvj-repo/                                          ← full git repo, private (not served)
+~/domains/pvjcampamento.com/public_html/             ← only web files (html, css, js, assets)
+```
 
 ---
 
@@ -8,13 +15,12 @@ Deployment works via **GitHub Webhook → deploy.php**. When a push lands on `ma
 
 ### 1. Generate a secret token
 
-Run this locally to get a random secret:
-
-```bash
-openssl rand -hex 32
+In PowerShell:
+```powershell
+-join ((1..32) | ForEach-Object { '{0:x2}' -f (Get-Random -Max 256) })
 ```
 
-Copy the output — you'll use it in steps 2 and 3.
+Copy the output.
 
 ### 2. Add the secret to GitHub
 
@@ -23,57 +29,82 @@ Go to **github.com/yangetze/PVJ → Settings → Secrets and variables → Actio
 - Name: `DEPLOY_SECRET`
 - Value: the token from step 1
 
-### 3. Create deploy-config.php on the server
+### 3. SSH into Hostinger and clone the repo
 
-This file holds the secret and path — it is excluded from git (via `.gitignore`) so it never appears in the repo.
+From your own machine (not GitHub Actions):
 
-After completing step 4 (git clone), go to **Hostinger → File Manager → public_html** and create a new file named `deploy-config.php` with this content:
+```bash
+ssh YOUR_USERNAME@YOUR_SSH_HOST -p 65002
+```
+
+Your SSH host and username are in Hostinger panel under **Hosting → Manage → SSH Access**.
+
+Once connected, clone the repo to a private directory **outside** `public_html`:
+
+```bash
+cd ~
+git clone https://github.com/yangetze/PVJ.git pvj-repo
+```
+
+Note the full path — you'll need it in step 4:
+```bash
+echo ~/pvj-repo
+# e.g. /home/u123456789/pvj-repo
+```
+
+### 4. Create deploy-config.php in public_html
+
+This file holds the secret and paths. It is excluded from git (`.gitignore`) so it never appears in the repo. Create it via **Hostinger → File Manager → public_html → New File** named `deploy-config.php`:
 
 ```php
 <?php
-define('DEPLOY_SECRET', 'YOUR_SECRET_HERE'); // same token as the GitHub secret
-define('REPO_PATH',     '/home/u123456789/domains/pvjcampamento.com/public_html'); // your real path
+define('DEPLOY_SECRET', 'YOUR_SECRET_HERE');  // same token as the GitHub secret
+define('REPO_PATH',     '/home/u123456789/pvj-repo');                              // path from step 3
+define('PUBLIC_PATH',   '/home/u123456789/domains/pvjcampamento.com/public_html'); // your public_html
 ```
 
-To find your real path and username: in Hostinger panel go to **Hosting → Manage → SSH Access** — the username (e.g. `u123456789`) is shown there. The full path is `/home/USERNAME/domains/pvjcampamento.com/public_html`.
+Replace `u123456789` with your real Hostinger username.
 
-Commit and push `deploy.php` to main — it will be synced to the server in step 5.
+### 5. Copy deploy.php into public_html
 
-### 4. SSH into Hostinger and initialize the git repo
-
-Do this once from your own machine (not GitHub Actions):
+`deploy.php` is in the repo but needs to be in `public_html` to be reachable over HTTPS. Copy it from the cloned repo via SSH:
 
 ```bash
-ssh u123456789@your-hostinger-ssh-host -p 65002
+cp ~/pvj-repo/deploy.php ~/domains/pvjcampamento.com/public_html/deploy.php
 ```
 
-Then inside the server:
+> After this, `deploy.php` in `public_html` is a manual copy. Future deploys via rsync intentionally skip it (so the live copy is never overwritten). If you ever update `deploy.php` in the repo, re-run this `cp` command.
+
+### 6. Do the first sync manually
+
+Run the rsync once via SSH to populate `public_html` with the web files:
 
 ```bash
-cd ~/domains/pvjcampamento.com/public_html
-
-# Back up existing files if any
-# Then initialize git and pull the repo
-git init
-git remote add origin https://github.com/yangetze/PVJ.git
-git fetch origin main
-git checkout -b main --track origin/main
+rsync -a --delete \
+  --exclude=".git/" \
+  --exclude=".gitignore" \
+  --exclude="CLAUDE.md" \
+  --exclude="docs/" \
+  --exclude=".github/" \
+  --exclude="deploy.php" \
+  --exclude="deploy-config.php" \
+  --exclude="*.md" \
+  --exclude="README*" \
+  ~/pvj-repo/ \
+  ~/domains/pvjcampamento.com/public_html/
 ```
 
-If the directory already has files and you want to overwrite them:
+### 7. Merge the PR on GitHub
 
-```bash
-git fetch origin main
-git reset --hard origin/main
-```
+This activates the new webhook-based workflow. After merging, every push to `main` will deploy automatically.
 
-### 5. Verify it works
+### 8. Verify it works
 
 Push any small change to `main`. Then check:
 
 1. GitHub Actions → the `notify` job should show `HTTP 200`
-2. Visit `https://pvjcampamento.com/deploy.php` directly — it should return `403 Forbidden` (correct, no signature)
-3. Your change should be live on the site
+2. Your change should be live on `pvjcampamento.com`
+3. Visiting `https://pvjcampamento.com/deploy.php` directly should return `403 Forbidden` (correct — no signature)
 
 ---
 
@@ -82,11 +113,10 @@ Push any small change to `main`. Then check:
 ```
 push to main
     └─► GitHub Actions calls deploy.php with HMAC-signed payload
-            └─► deploy.php verifies signature → runs git pull origin main
-                    └─► site is updated
+            └─► deploy.php verifies signature
+                    └─► git pull in ~/pvj-repo
+                            └─► rsync web files only → public_html
 ```
-
-Every push to `main` automatically deploys within seconds. No manual steps needed after the one-time setup above.
 
 ---
 
@@ -94,7 +124,9 @@ Every push to `main` automatically deploys within seconds. No manual steps neede
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| Actions job fails with non-200 | deploy.php not reachable or path wrong | Check `REPO_PATH` in deploy.php |
-| `403 Forbidden` in Actions log | Secret mismatch | Make sure `DEPLOY_SECRET` in GitHub and in deploy.php are identical |
-| `git pull` output shows errors | Git not initialized on server | Redo step 4 |
+| Actions job fails with non-200 | deploy.php not reachable | Check that deploy.php exists in public_html (step 5) |
+| `403 Forbidden` in Actions log | Secret mismatch | Make sure `DEPLOY_SECRET` in GitHub and in deploy-config.php are identical |
+| `500 deploy-config.php not found` | Missing config file | Create deploy-config.php in public_html (step 4) |
+| `git pull` errors in response | Repo not initialized | Redo step 3 |
 | Changes not appearing | Hostinger cache | Clear LiteSpeed Cache in the control panel |
+| Non-web files still visible | Old files in public_html | Run the rsync from step 6 manually |
