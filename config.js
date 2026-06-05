@@ -11,5 +11,5 @@ const WHATSAPP_MESSAGE = 'Hola estoy interesado para inscripción del campamento
 const WHATSAPP_URL     = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 const WHATSAPP_DONACIONES_NUMBER  = '584242851050'; // donations contact
-const WHATSAPP_DONACIONES_MESSAGE = 'Estoy interesado en planes de donaciones mensuales/quincenales del PVJ';
+const WHATSAPP_DONACIONES_MESSAGE = 'Estoy interesado en DONAR para Plan Vacacional Juvenil.';
 const WHATSAPP_DONACIONES_URL     = `https://wa.me/${WHATSAPP_DONACIONES_NUMBER}?text=${encodeURIComponent(WHATSAPP_DONACIONES_MESSAGE)}`;
