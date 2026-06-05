@@ -5,15 +5,8 @@ const donacionesFaqData = [
     {
         question: "¿Dónde va exactamente mi dinero?",
         answer: `
-            <p><strong>Tu donación cubre los costos reales de la beca del joven:</strong></p>
-            <ul>
-                <li>Inscripción al campamento</li>
-                <li>Alojamiento en cabañas</li>
-                <li>Comidas durante los 4 días</li>
-                <li>Transporte Caracas-Valencia</li>
-                <li>Actividades y programa completo</li>
-            </ul>
-            <p><strong>100% del dinero va a la experiencia del joven.</strong> No hay intermediarios ni comisiones administrativas.</p>
+            <p>Tu donación cubre los costos reales de la beca del joven: desde la inscripción y el alojamiento en cabañas, hasta las comidas durante los 4 días, el transporte y todas las actividades del programa.</p>
+            <p><strong>100% del dinero va a la experiencia del joven.</strong> No hay intermediarios ni comisiones administrativas. Total transparencia.</p>
         `
     },
     {
