@@ -2186,6 +2186,12 @@ a:focus {
     line-height: var(--line-height-relaxed);
 }
 
+.hero-cta-inline {
+    color: var(--accent-lime);
+    font-weight: 700;
+    font-style: italic;
+}
+
 .page-hero-cta {
     display: flex;
     gap: var(--spacing-md);
@@ -2906,7 +2912,16 @@ a:focus {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-xl);
+}
+
+.donation-methods-grid--3col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 900px) {
+    .donation-methods-grid--3col {
+        grid-template-columns: 1fr;
+    }
 }
 
 .donation-method-card {
