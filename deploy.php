@@ -8,7 +8,7 @@
  */
 
 define('DEPLOY_SECRET', getenv('DEPLOY_SECRET') ?: 'REPLACE_WITH_YOUR_SECRET');
-define('REPO_PATH',     '/home/u123456789/domains/pvjcampamento.com/public_html'); // update with your Hostinger username
+define('REPO_PATH',     '/home/u626147236/domains/pvjcampamento.com/public_html'); // update with your Hostinger username
 
 // Verify signature
 $signature = $_SERVER['HTTP_X_HUB_SIGNATURE_256'] ?? '';
