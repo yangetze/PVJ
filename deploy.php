@@ -24,7 +24,14 @@ $expected  = 'sha256=' . hash_hmac('sha256', $payload, DEPLOY_SECRET);
 
 if (!hash_equals($expected, $signature)) {
     http_response_code(403);
-    exit('Forbidden');
+    // Debug info — remove once deployment is working
+    exit(implode("\n", [
+        'Forbidden: signature mismatch',
+        'received : ' . $signature,
+        'expected : ' . $expected,
+        'secret_len: ' . (defined('DEPLOY_SECRET') ? strlen(DEPLOY_SECRET) : 'UNDEFINED'),
+        'payload  : ' . $payload,
+    ]));
 }
 
 // Pull latest code into the private repo directory
