@@ -140,11 +140,13 @@ document.addEventListener('DOMContentLoaded', () => {
         waTransferencia.href = WHATSAPP_TRANSFERENCIA_URL;
     }
 
-    // Smooth scroll for internal anchor links
+    // Smooth scroll for internal anchor links (skip bare "#" used as placeholder)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (!href || href === '#') return;
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const target = document.querySelector(href);
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth' });
             }
