@@ -120,25 +120,16 @@ document.querySelectorAll('.fade-in').forEach(el => {
 document.addEventListener('DOMContentLoaded', () => {
     renderDonacionesFAQ();
 
-    const waBtn = document.getElementById('whatsappDonacionesBtn');
-    if (waBtn && typeof WHATSAPP_DONACIONES_URL !== 'undefined') {
-        waBtn.href = WHATSAPP_DONACIONES_URL;
+    function bindWhatsApp(id, url) {
+        const btn = document.getElementById(id);
+        if (!btn || typeof url === 'undefined') return;
+        btn.addEventListener('click', () => window.open(url, '_blank', 'noopener,noreferrer'));
     }
 
-    const waZelle = document.getElementById('whatsappZelleBtn');
-    if (waZelle && typeof WHATSAPP_ZELLE_URL !== 'undefined') {
-        waZelle.href = WHATSAPP_ZELLE_URL;
-    }
-
-    const waPagoMovil = document.getElementById('whatsappPagoMovilBtn');
-    if (waPagoMovil && typeof WHATSAPP_PAGO_MOVIL_URL !== 'undefined') {
-        waPagoMovil.href = WHATSAPP_PAGO_MOVIL_URL;
-    }
-
-    const waTransferencia = document.getElementById('whatsappTransferenciaBtn');
-    if (waTransferencia && typeof WHATSAPP_TRANSFERENCIA_URL !== 'undefined') {
-        waTransferencia.href = WHATSAPP_TRANSFERENCIA_URL;
-    }
+    bindWhatsApp('whatsappDonacionesBtn',   WHATSAPP_DONACIONES_URL);
+    bindWhatsApp('whatsappZelleBtn',        WHATSAPP_ZELLE_URL);
+    bindWhatsApp('whatsappPagoMovilBtn',    WHATSAPP_PAGO_MOVIL_URL);
+    bindWhatsApp('whatsappTransferenciaBtn', WHATSAPP_TRANSFERENCIA_URL);
 
     // Smooth scroll for internal anchor links (skip bare "#" used as placeholder)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
