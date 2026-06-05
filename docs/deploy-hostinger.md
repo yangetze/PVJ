@@ -23,17 +23,19 @@ Go to **github.com/yangetze/PVJ → Settings → Secrets and variables → Actio
 - Name: `DEPLOY_SECRET`
 - Value: the token from step 1
 
-### 3. Configure deploy.php on the server
+### 3. Create deploy-config.php on the server
 
-Open `deploy.php` and update two lines:
+This file holds the secret and path — it is excluded from git (via `.gitignore`) so it never appears in the repo.
+
+After completing step 4 (git clone), go to **Hostinger → File Manager → public_html** and create a new file named `deploy-config.php` with this content:
 
 ```php
-define('DEPLOY_SECRET', 'REPLACE_WITH_YOUR_SECRET'); // paste your token here
+<?php
+define('DEPLOY_SECRET', 'YOUR_SECRET_HERE'); // same token as the GitHub secret
 define('REPO_PATH',     '/home/u123456789/domains/pvjcampamento.com/public_html'); // your real path
 ```
 
-To find your real path, SSH into Hostinger and run `pwd` from `public_html`.
-Your Hostinger username (the `u123456789` part) is visible in the Hostinger control panel under **Hosting → Manage → SSH Access**.
+To find your real path and username: in Hostinger panel go to **Hosting → Manage → SSH Access** — the username (e.g. `u123456789`) is shown there. The full path is `/home/USERNAME/domains/pvjcampamento.com/public_html`.
 
 Commit and push `deploy.php` to main — it will be synced to the server in step 5.
 
