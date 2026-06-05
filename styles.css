@@ -2301,6 +2301,38 @@ a:focus {
     margin-top: var(--spacing-md);
 }
 
+.why-card-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: var(--spacing-md);
+}
+
+.why-card-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem var(--spacing-sm);
+    background: rgba(178, 223, 20, 0.06);
+    border: 1px solid rgba(178, 223, 20, 0.2);
+    border-radius: 6px;
+    color: var(--accent-lime);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.why-card-link:hover {
+    background: rgba(178, 223, 20, 0.12);
+    border-color: var(--accent-lime);
+}
+
+.why-card-link-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
 /* ============================================
    DONATIONS PAGE — IMPACT BANNER
    ============================================ */
