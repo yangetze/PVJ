@@ -1,20 +1,21 @@
 <?php
 /**
  * Webhook endpoint called by GitHub Actions on every push to main.
- * Verifies the HMAC-SHA256 signature then runs `git pull origin main`.
+ * Verifies the HMAC-SHA256 signature, runs git pull in the repo directory
+ * (outside public_html), then rsyncs only the public web files into public_html.
  *
- * Setup: set DEPLOY_SECRET in this file (or via an env var) to the same
- * value stored in the GitHub Actions secret DEPLOY_SECRET.
+ * deploy-config.php (excluded from git) must define:
+ *   DEPLOY_SECRET  — shared HMAC token (same as GitHub Actions secret)
+ *   REPO_PATH      — absolute path to the cloned repo (outside public_html)
+ *   PUBLIC_PATH    — absolute path to public_html
  */
 
-// Secret lives in deploy-config.php (excluded from git, created manually on the server)
 if (file_exists(__DIR__ . '/deploy-config.php')) {
     require __DIR__ . '/deploy-config.php';
 } else {
     http_response_code(500);
     exit('deploy-config.php not found');
 }
-// DEPLOY_SECRET and REPO_PATH are defined in deploy-config.php
 
 // Verify signature
 $signature = $_SERVER['HTTP_X_HUB_SIGNATURE_256'] ?? '';
@@ -26,8 +27,25 @@ if (!hash_equals($expected, $signature)) {
     exit('Forbidden');
 }
 
-// Run git pull
-$output = shell_exec('cd ' . escapeshellarg(REPO_PATH) . ' && git pull origin main 2>&1');
+// Pull latest code into the private repo directory
+$pull = shell_exec('cd ' . escapeshellarg(REPO_PATH) . ' && git pull origin main 2>&1');
+
+// Sync only public web files into public_html, excluding non-public files
+$rsync = shell_exec(
+    'rsync -a --delete ' .
+    '--exclude=".git/" ' .
+    '--exclude=".gitignore" ' .
+    '--exclude="CLAUDE.md" ' .
+    '--exclude="docs/" ' .
+    '--exclude=".github/" ' .
+    '--exclude="deploy.php" ' .
+    '--exclude="deploy-config.php" ' .
+    '--exclude="*.md" ' .
+    '--exclude="README*" ' .
+    escapeshellarg(REPO_PATH . '/') . ' ' .
+    escapeshellarg(PUBLIC_PATH . '/') . ' 2>&1'
+);
 
 http_response_code(200);
-echo "OK\n" . htmlspecialchars($output);
+echo "OK\n\n--- git pull ---\n" . htmlspecialchars($pull) .
+     "\n--- rsync ---\n"       . htmlspecialchars($rsync);
