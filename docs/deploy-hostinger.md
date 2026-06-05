@@ -94,6 +94,7 @@ Every push to `main` automatically deploys within seconds. No manual steps neede
 
 | Symptom | Cause | Fix |
 |---|---|---|
+
 | Actions job fails with non-200 | deploy.php not reachable or path wrong | Check `REPO_PATH` in deploy.php |
 | `403 Forbidden` in Actions log | Secret mismatch | Make sure `DEPLOY_SECRET` in GitHub and in deploy.php are identical |
 | `git pull` output shows errors | Git not initialized on server | Redo step 4 |
