@@ -7,12 +7,13 @@ const donacionesFaqData = [
         answer: `
             <p><strong>Tu donación cubre los costos reales de la beca del joven:</strong></p>
             <ul>
-                <li>Inscripción al campamento: €40</li>
-                <li>Alojamiento: €30</li>
-                <li>Comidas: €15</li>
-                <li>Transporte: €10</li>
+                <li>Inscripción al campamento</li>
+                <li>Alojamiento en cabañas</li>
+                <li>Comidas durante los 4 días</li>
+                <li>Transporte Caracas-Valencia</li>
+                <li>Actividades y programa completo</li>
             </ul>
-            <p><strong>100% del dinero va a la experiencia del joven.</strong> No hay intermediarios ni comisiones administrativas. Total transparencia.</p>
+            <p><strong>100% del dinero va a la experiencia del joven.</strong> No hay intermediarios ni comisiones administrativas.</p>
         `
     },
     {
@@ -44,24 +45,10 @@ const donacionesFaqData = [
         `
     },
     {
-        question: "¿Es deducible fiscalmente?",
-        answer: `
-            <p>Buena pregunta. La Iglesia Bautista Emanuel cuenta con reconocimiento legal como organización sin fines de lucro.</p>
-            <p><strong>Para detalles fiscales específicos de tu país, recomendamos consultar:</strong></p>
-            <p>📧 <a href="mailto:ministeriojuvenilibe@gmail.com">ministeriojuvenilibe@gmail.com</a></p>
-            <p>Nosotros te proporcionamos comprobante de donación formal para cualquier gestión tributaria.</p>
-        `
-    },
-    {
         question: "¿Qué pasa si se juntan más fondos de los necesarios?",
         answer: `
-            <p><strong>Excelente pregunta.</strong> Si excedemos la meta:</p>
-            <ul>
-                <li><strong>Plan A:</strong> Extender las becas a más jóvenes</li>
-                <li><strong>Plan B:</strong> Mejorar la experiencia (más actividades, mejor catering)</li>
-                <li><strong>Plan C:</strong> Fondo para campamentos futuros del ministerio juvenil</li>
-            </ul>
-            <p><strong>Seremos transparentes al 100%</strong> sobre cómo se usa cada euro. Te enviaremos un reporte completo.</p>
+            <p>Cada euro extra se invierte en lo mismo: llevar a más adolescentes y jóvenes al campamento. Si superamos la meta, ampliamos el número de becas.</p>
+            <p><strong>Seremos transparentes al 100%</strong> sobre cómo se usa cada euro.</p>
         `
     },
     {
@@ -69,19 +56,6 @@ const donacionesFaqData = [
         answer: `
             <p><strong>Honestidad:</strong> Si faltamos fondos, priorizaremos los jóvenes con mayor necesidad económica y mayor compromiso ministerial.</p>
             <p>Pero queremos llegar a todos. Por eso estamos contigo. Cada donación nos acerca más a la meta.</p>
-        `
-    },
-    {
-        question: "¿Recibiré comprobante de mi donación?",
-        answer: `
-            <p><strong>Sí. 100% transparencia.</strong></p>
-            <p>Enviaremos:</p>
-            <ul>
-                <li>✓ Recibo digital (con número de transacción)</li>
-                <li>✓ Confirmación de impacto (ej: 'Tu donación aseguró transporte para un joven de 17 años')</li>
-                <li>✓ Fotos post-campamento (respetando privacidad)</li>
-            </ul>
-            <p>Simplemente, danos tu email al realizar la donación.</p>
         `
     }
 ];
@@ -152,6 +126,11 @@ document.querySelectorAll('.fade-in').forEach(el => {
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
     renderDonacionesFAQ();
+
+    const waBtn = document.getElementById('whatsappDonacionesBtn');
+    if (waBtn && typeof WHATSAPP_DONACIONES_URL !== 'undefined') {
+        waBtn.href = WHATSAPP_DONACIONES_URL;
+    }
 
     // Smooth scroll for internal anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

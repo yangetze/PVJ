@@ -2186,6 +2186,12 @@ a:focus {
     line-height: var(--line-height-relaxed);
 }
 
+.hero-cta-inline {
+    color: var(--accent-lime);
+    font-weight: 700;
+    font-style: italic;
+}
+
 .page-hero-cta {
     display: flex;
     gap: var(--spacing-md);
@@ -2299,6 +2305,38 @@ a:focus {
     color: var(--accent-blue-bright);
     font-weight: 600;
     margin-top: var(--spacing-md);
+}
+
+.why-card-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: var(--spacing-md);
+}
+
+.why-card-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem var(--spacing-sm);
+    background: rgba(178, 223, 20, 0.06);
+    border: 1px solid rgba(178, 223, 20, 0.2);
+    border-radius: 6px;
+    color: var(--accent-lime);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.why-card-link:hover {
+    background: rgba(178, 223, 20, 0.12);
+    border-color: var(--accent-lime);
+}
+
+.why-card-link-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
 }
 
 /* ============================================
@@ -2874,7 +2912,16 @@ a:focus {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-xl);
+}
+
+.donation-methods-grid--3col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 900px) {
+    .donation-methods-grid--3col {
+        grid-template-columns: 1fr;
+    }
 }
 
 .donation-method-card {
