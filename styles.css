@@ -728,6 +728,29 @@ nav {
 .included-item:nth-child(4) { animation-delay: 0.7s; }
 .included-item:nth-child(5) { animation-delay: 0.8s; }
 
+.included-item--new {
+    border-color: var(--accent-lime);
+}
+
+.included-new-badge {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background: var(--accent-lime);
+    color: var(--bg-primary);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 0.2em 0.55em;
+    text-transform: uppercase;
+    animation: pulseBadge 1.8s ease-in-out infinite;
+}
+
+@keyframes pulseBadge {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(178, 223, 20, 0.5); }
+    50%       { transform: scale(1.06); box-shadow: 0 0 0 6px rgba(178, 223, 20, 0); }
+}
+
 .included-item::before {
     content: '';
     position: absolute;
