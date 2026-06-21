@@ -339,4 +339,41 @@ document.addEventListener('DOMContentLoaded', () => {
     if (euroInput) {
         euroInput.addEventListener('input', updateCalculation);
     }
+
+    // Copy buttons in the payment data section
+    function flashCopied(btn) {
+        btn.classList.add('copied');
+        setTimeout(() => btn.classList.remove('copied'), 2000);
+    }
+
+    function copyText(text) {
+        if (navigator.clipboard) {
+            return navigator.clipboard.writeText(text);
+        }
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        return Promise.resolve();
+    }
+
+    document.querySelectorAll('.pagos-copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            copyText(btn.dataset.copy).then(() => flashCopied(btn)).catch(() => {});
+        });
+    });
+
+    document.querySelectorAll('.pagos-copy-all-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const card = btn.closest('.pagos-datos-card');
+            const lines = [...card.querySelectorAll('.pagos-dato-item')].map(item => {
+                const label = item.querySelector('.pagos-dato-label').textContent.trim();
+                const value = item.querySelector('.pagos-dato-value').textContent.trim();
+                return `${label}: ${value}`;
+            });
+            copyText(lines.join('\n')).then(() => flashCopied(btn)).catch(() => {});
+        });
+    });
 });
