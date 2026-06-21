@@ -320,10 +320,15 @@ document.addEventListener('DOMContentLoaded', () => {
         registrarmeBtn.href = INSCRIPTION_URL;
     }
 
-    // Wire WhatsApp URL to "Estoy interesado" CTA
+    // Wire WhatsApp URL to "Estoy interesado" and "Apartar mi cupo" CTAs
     const interestedBtn = document.getElementById('interestedBtn');
     if (interestedBtn) {
         interestedBtn.href = WHATSAPP_URL;
+    }
+
+    const apartarCupoBtn = document.getElementById('apartarCupoBtn');
+    if (apartarCupoBtn) {
+        apartarCupoBtn.href = WHATSAPP_URL;
     }
 
     // Fetch live euro rate and populate badge + calculator
