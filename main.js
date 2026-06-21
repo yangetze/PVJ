@@ -368,12 +368,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.pagos-copy-all-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const card = btn.closest('.pagos-datos-card');
-            const lines = [...card.querySelectorAll('.pagos-dato-item')].map(item => {
-                const label = item.querySelector('.pagos-dato-label').textContent.trim();
-                const value = item.querySelector('.pagos-dato-value').textContent.trim();
-                return `${label}: ${value}`;
-            });
-            copyText(lines.join('\n')).then(() => flashCopied(btn)).catch(() => {});
+            const values = [...card.querySelectorAll('.pagos-copy-btn')].map(b => b.dataset.copy);
+            copyText(values.join('\n')).then(() => flashCopied(btn)).catch(() => {});
         });
     });
 });
