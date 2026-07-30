@@ -3455,6 +3455,35 @@ a:focus {
     object-fit: contain;
 }
 
+.merch-card-thumbs {
+    display: flex;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: #ffffff;
+}
+
+.merch-card-thumb {
+    width: 3rem;
+    height: 3rem;
+    padding: 2px;
+    background: #ffffff;
+    border: 2px solid var(--border-subtle);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color var(--transition-fast);
+}
+
+.merch-card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.merch-card-thumb.active,
+.merch-card-thumb:hover {
+    border-color: var(--accent-lime);
+}
+
 .merch-card-body {
     background: var(--bg-secondary);
     padding: var(--spacing-md);
@@ -3475,41 +3504,14 @@ a:focus {
 .merch-card-price {
     color: var(--accent-lime);
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
 }
 
-.merch-card-price-note {
+.merch-card-price-sep {
     color: var(--text-secondary);
     font-weight: 400;
-    font-size: 0.8rem;
-}
-
-.merch-pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-xl);
-}
-
-.merch-price-card {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-subtle);
-    border-top: 3px solid var(--accent-lime);
-    padding: var(--spacing-lg);
-    text-align: center;
-}
-
-.merch-price-label {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: var(--spacing-xs);
-}
-
-.merch-price-amount {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--accent-lime);
 }
 
 .merch-payment-methods {
@@ -3656,10 +3658,6 @@ a:focus {
 
 @media (max-width: 600px) {
     .merch-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .merch-pricing-grid {
         grid-template-columns: 1fr;
     }
 }

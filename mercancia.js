@@ -5,19 +5,22 @@ const merchModels = [
     {
         id: 'jesus-es-rey',
         name: 'Jesús es Rey',
-        image: 'assets/merch/jesus-es-rey.png',
+        front: 'assets/merch/jesus-es-rey-front.png',
+        back: 'assets/merch/jesus-es-rey-back.png',
         bestSeller: false
     },
     {
         id: 'se-la-luz',
         name: 'Sé la Luz',
-        image: 'assets/merch/se-la-luz.png',
+        front: 'assets/merch/se-la-luz-front.png',
+        back: 'assets/merch/se-la-luz-back.png',
         bestSeller: true
     },
     {
         id: 'me-hallaste',
         name: 'Me Hallaste',
-        image: 'assets/merch/me-hallaste.png',
+        front: 'assets/merch/me-hallaste-front.png',
+        back: 'assets/merch/me-hallaste-back.png',
         bestSeller: false
     }
 ];
@@ -38,15 +41,40 @@ function renderMerchGallery() {
         card.innerHTML = `
             ${model.bestSeller ? '<span class="merch-card-badge">🔥 Más Vendido</span>' : ''}
             <div class="merch-card-image-wrap">
-                <img src="${model.image}" alt="Camisa ${model.name}" class="merch-card-image" loading="lazy">
+                <img src="${model.front}" alt="Camisa ${model.name}" class="merch-card-image" data-main-image loading="lazy">
+            </div>
+            <div class="merch-card-thumbs">
+                <button type="button" class="merch-card-thumb active" data-image="${model.front}" aria-label="Ver frente">
+                    <img src="${model.front}" alt="Frente ${model.name}" loading="lazy">
+                </button>
+                <button type="button" class="merch-card-thumb" data-image="${model.back}" aria-label="Ver espalda">
+                    <img src="${model.back}" alt="Espalda ${model.name}" loading="lazy">
+                </button>
             </div>
             <div class="merch-card-body">
                 <h3 class="merch-card-name">${model.name}</h3>
                 <p class="merch-card-colors">${merchColors.join(' · ')}</p>
                 <p class="merch-card-sizes">Tallas: ${merchSizes.join(' · ')}</p>
-                <p class="merch-card-price">$12 <span class="merch-card-price-note">(hasta XL) · $15 (2XL+)</span></p>
+                <p class="merch-card-price">S–XL: $12 <span class="merch-card-price-sep">·</span> 2XL en adelante: $15</p>
+                <button type="button" class="btn btn-primary btn-block merch-card-cta" data-model="${model.name}">
+                    Hacer mi pedido
+                </button>
             </div>
         `;
+
+        const mainImage = card.querySelector('[data-main-image]');
+        card.querySelectorAll('.merch-card-thumb').forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                mainImage.src = thumb.dataset.image;
+                card.querySelectorAll('.merch-card-thumb').forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+            });
+        });
+
+        card.querySelector('.merch-card-cta').addEventListener('click', () => {
+            goToOrderForm(model.name);
+        });
+
         grid.appendChild(card);
     });
 }
@@ -60,7 +88,7 @@ function merchOptions(list) {
     return list.map(v => `<option value="${v}">${v}</option>`).join('');
 }
 
-function addMerchOrderRow() {
+function addMerchOrderRow(presetModel) {
     merchItemCount++;
     const container = document.getElementById('merchOrderItems');
     if (!container) return;
@@ -83,9 +111,29 @@ function addMerchOrderRow() {
     `;
     container.appendChild(row);
 
+    if (presetModel) {
+        row.querySelector('[data-field="modelo"]').value = presetModel;
+    }
+
     const removeBtn = row.querySelector('.merch-order-remove');
     if (removeBtn) {
         removeBtn.addEventListener('click', () => row.remove());
+    }
+
+    return row;
+}
+
+function goToOrderForm(presetModel) {
+    const container = document.getElementById('merchOrderItems');
+    if (container) {
+        container.innerHTML = '';
+        merchItemCount = 0;
+    }
+    addMerchOrderRow(presetModel);
+
+    const target = document.getElementById('pedido');
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
     }
 }
 
@@ -118,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const addItemBtn = document.getElementById('merchAddItemBtn');
     if (addItemBtn) {
-        addItemBtn.addEventListener('click', addMerchOrderRow);
+        addItemBtn.addEventListener('click', () => addMerchOrderRow());
     }
 
     const form = document.getElementById('merchOrderForm');
