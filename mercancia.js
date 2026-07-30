@@ -13,14 +13,14 @@ const merchModels = [
         id: 'se-la-luz',
         name: 'Sé la Luz',
         front: 'assets/merch/se-la-luz-front.png',
-        back: 'assets/merch/se-la-luz-back.png',
+        back: null,
         bestSeller: true
     },
     {
         id: 'me-hallaste',
         name: 'Me Hallaste',
         front: 'assets/merch/me-hallaste-front.png',
-        back: 'assets/merch/me-hallaste-back.png',
+        back: null,
         bestSeller: false
     }
 ];
@@ -36,13 +36,17 @@ function renderMerchGallery() {
     if (!grid) return;
 
     merchModels.forEach(model => {
+        const hasBack = Boolean(model.back);
+
         const card = document.createElement('div');
         card.className = 'merch-card';
         card.innerHTML = `
             ${model.bestSeller ? '<span class="merch-card-badge">🔥 Más Vendido</span>' : ''}
             <div class="merch-card-image-wrap">
                 <img src="${model.front}" alt="Camisa ${model.name}" class="merch-card-image" data-main-image loading="lazy">
+                <button type="button" class="merch-card-zoom" aria-label="Ver imagen en grande">🔍 Zoom</button>
             </div>
+            ${hasBack ? `
             <div class="merch-card-thumbs">
                 <button type="button" class="merch-card-thumb active" data-image="${model.front}" aria-label="Ver frente">
                     <img src="${model.front}" alt="Frente ${model.name}" loading="lazy">
@@ -50,12 +54,21 @@ function renderMerchGallery() {
                 <button type="button" class="merch-card-thumb" data-image="${model.back}" aria-label="Ver espalda">
                     <img src="${model.back}" alt="Espalda ${model.name}" loading="lazy">
                 </button>
-            </div>
+            </div>` : ''}
             <div class="merch-card-body">
                 <h3 class="merch-card-name">${model.name}</h3>
                 <p class="merch-card-colors">${merchColors.join(' · ')}</p>
                 <p class="merch-card-sizes">Tallas: ${merchSizes.join(' · ')}</p>
-                <p class="merch-card-price">S–XL: $12 <span class="merch-card-price-sep">·</span> 2XL en adelante: $15</p>
+                <div class="merch-card-price-table">
+                    <div class="merch-card-price-row">
+                        <span class="merch-card-price-label">S – XL</span>
+                        <span class="merch-card-price-value">$12</span>
+                    </div>
+                    <div class="merch-card-price-row">
+                        <span class="merch-card-price-label">2XL en adelante</span>
+                        <span class="merch-card-price-value">$15</span>
+                    </div>
+                </div>
                 <button type="button" class="btn btn-primary btn-block merch-card-cta" data-model="${model.name}">
                     Hacer mi pedido
                 </button>
@@ -63,12 +76,19 @@ function renderMerchGallery() {
         `;
 
         const mainImage = card.querySelector('[data-main-image]');
-        card.querySelectorAll('.merch-card-thumb').forEach(thumb => {
-            thumb.addEventListener('click', () => {
-                mainImage.src = thumb.dataset.image;
-                card.querySelectorAll('.merch-card-thumb').forEach(t => t.classList.remove('active'));
-                thumb.classList.add('active');
+
+        if (hasBack) {
+            card.querySelectorAll('.merch-card-thumb').forEach(thumb => {
+                thumb.addEventListener('click', () => {
+                    mainImage.src = thumb.dataset.image;
+                    card.querySelectorAll('.merch-card-thumb').forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                });
             });
+        }
+
+        card.querySelector('.merch-card-zoom').addEventListener('click', () => {
+            openMerchLightbox(mainImage.src, model.name);
         });
 
         card.querySelector('.merch-card-cta').addEventListener('click', () => {
@@ -77,6 +97,24 @@ function renderMerchGallery() {
 
         grid.appendChild(card);
     });
+}
+
+// ============================================
+// IMAGE ZOOM LIGHTBOX
+// ============================================
+function openMerchLightbox(src, alt) {
+    const lightbox = document.getElementById('merchLightbox');
+    const lightboxImage = document.getElementById('merchLightboxImage');
+    if (!lightbox || !lightboxImage) return;
+
+    lightboxImage.src = src;
+    lightboxImage.alt = alt;
+    lightbox.classList.add('active');
+}
+
+function closeMerchLightbox() {
+    const lightbox = document.getElementById('merchLightbox');
+    if (lightbox) lightbox.classList.remove('active');
 }
 
 // ============================================
@@ -163,6 +201,18 @@ function buildMerchWhatsAppMessage(discountRequested) {
 document.addEventListener('DOMContentLoaded', () => {
     renderMerchGallery();
     addMerchOrderRow();
+
+    const lightbox = document.getElementById('merchLightbox');
+    const lightboxClose = document.getElementById('merchLightboxClose');
+    if (lightbox && lightboxClose) {
+        lightboxClose.addEventListener('click', closeMerchLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeMerchLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMerchLightbox();
+        });
+    }
 
     const addItemBtn = document.getElementById('merchAddItemBtn');
     if (addItemBtn) {
