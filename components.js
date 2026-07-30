@@ -21,6 +21,7 @@
         { href: `${idxPrefix}#payment`,         label: 'Inversión',   activeFile: 'index.html',       isAnchor: true },
         { href: 'pagos.html',                   label: 'Reportar Pago', activeFile: 'pagos.html',     isAnchor: false },
         { href: 'donaciones.html',              label: 'Donaciones',  activeFile: 'donaciones.html',  isAnchor: false },
+        { href: 'mercancia.html',               label: 'Mercancía',   activeFile: 'mercancia.html',   isAnchor: false },
     ];
 
     function getActiveAttr(item) {
@@ -93,6 +94,7 @@
                         <li><a href="${idxPrefix}#payment">Información de Pago</a></li>
                         <li><a href="pagos.html">Reportar Pago</a></li>
                         <li><a href="donaciones.html">Donaciones</a></li>
+                        <li><a href="mercancia.html">Mercancía</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">

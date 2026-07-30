@@ -3394,3 +3394,272 @@ a:focus {
         border-width: 1px;
     }
 }
+
+/* ============================================
+   MERCH SECTION
+   ============================================ */
+.merch-catalog-section,
+.merch-pricing-section,
+.merch-order-section {
+    padding: var(--spacing-2xl) 0;
+}
+
+.merch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.merch-card {
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.merch-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.merch-card-badge {
+    position: absolute;
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+    z-index: 1;
+    background: var(--accent-lime);
+    color: var(--bg-primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border-radius: 2px;
+}
+
+.merch-card-image-wrap {
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+}
+
+.merch-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.merch-card-body {
+    background: var(--bg-secondary);
+    padding: var(--spacing-md);
+}
+
+.merch-card-name {
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.merch-card-colors,
+.merch-card-sizes {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+
+.merch-card-price {
+    color: var(--accent-lime);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-top: var(--spacing-xs);
+}
+
+.merch-card-price-note {
+    color: var(--text-secondary);
+    font-weight: 400;
+    font-size: 0.8rem;
+}
+
+.merch-pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.merch-price-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-top: 3px solid var(--accent-lime);
+    padding: var(--spacing-lg);
+    text-align: center;
+}
+
+.merch-price-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.merch-price-amount {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent-lime);
+}
+
+.merch-payment-methods {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.merch-payment-methods-title {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.merch-payment-methods-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.merch-payment-chip {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.merch-delivery-section {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: var(--spacing-xl);
+    text-align: center;
+    margin: var(--spacing-xl) 0;
+}
+
+.merch-delivery-section h3 {
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.merch-delivery-section p {
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: var(--line-height-relaxed);
+}
+
+.merch-order-form {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.merch-order-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.merch-order-row {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1fr 0.8fr auto;
+    gap: var(--spacing-xs);
+    align-items: center;
+}
+
+.merch-order-select,
+.merch-order-qty {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    padding: 0.6rem;
+    border-radius: 4px;
+    font-family: var(--font-family);
+    font-size: 0.9rem;
+}
+
+.merch-order-select:focus,
+.merch-order-qty:focus {
+    outline: none;
+    border-color: var(--border-active);
+}
+
+.merch-order-remove {
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.merch-order-remove:hover {
+    border-color: var(--accent-lime);
+    color: var(--accent-lime);
+}
+
+#merchAddItemBtn {
+    margin-bottom: var(--spacing-md);
+}
+
+.merch-discount-check {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-md);
+    cursor: pointer;
+}
+
+.merch-discount-check input {
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--accent-lime);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .merch-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .merch-order-row {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "modelo modelo"
+            "color talla"
+            "cantidad remove";
+    }
+
+    .merch-order-row select[data-field="modelo"] { grid-area: modelo; }
+    .merch-order-row select[data-field="color"] { grid-area: color; }
+    .merch-order-row select[data-field="talla"] { grid-area: talla; }
+    .merch-order-row input[data-field="cantidad"] { grid-area: cantidad; }
+    .merch-order-row .merch-order-remove { grid-area: remove; justify-self: end; }
+}
+
+@media (max-width: 600px) {
+    .merch-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .merch-pricing-grid {
+        grid-template-columns: 1fr;
+    }
+}

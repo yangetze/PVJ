@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercancía - PVJ 2026 | In-Cómoda-Mente</title>
+    <meta name="description" content="Camisas pro-fondo del Campamento Juvenil PVJ 2026 - In-Cómoda-Mente. Cada compra apoya el campamento.">
+    <meta name="keywords" content="camisas campamento juvenil, mercancía PVJ 2026, pro-fondo, Venezuela, Iglesia Bautista Emanuel">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://pvjcampamento.com/mercancia.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pvjcampamento.com/mercancia.html">
+    <meta property="og:title" content="Mercancía - PVJ 2026 | In-Cómoda-Mente">
+    <meta property="og:description" content="Camisas pro-fondo del Campamento Juvenil PVJ 2026. Cada compra apoya el campamento.">
+    <meta property="og:image" content="https://pvjcampamento.com/assets/logo.png">
+    <meta property="og:locale" content="es_VE">
+    <meta property="og:site_name" content="PVJ Campamento">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mercancía - PVJ 2026 | In-Cómoda-Mente">
+    <meta name="twitter:description" content="Camisas pro-fondo del Campamento Juvenil PVJ 2026. Cada compra apoya el campamento.">
+    <meta name="twitter:image" content="https://pvjcampamento.com/assets/logo.png">
+
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- HEADER & NAVIGATION — rendered by components.js -->
+    <header></header>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">Viste la transformación</h1>
+            <p class="page-hero-subtitle">Lleva contigo el mensaje de In-Cómoda-Mente. Cada camisa que compras es un aporte directo al campamento.</p>
+            <div class="page-hero-cta">
+                <a href="#catalogo" class="btn btn-primary">Ver modelos disponibles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATALOG / GALLERY -->
+    <section id="catalogo" class="merch-catalog-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestros Modelos</h2>
+                <p>Diseños que llevan un mensaje — elige el tuyo</p>
+            </div>
+
+            <div class="merch-grid" id="merchGrid">
+                <!-- Tarjetas de producto generadas dinámicamente por mercancia.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING & PAYMENT -->
+    <section class="merch-pricing-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Precios claros, sin sorpresas</h2>
+            </div>
+
+            <div class="merch-pricing-grid">
+                <div class="merch-price-card">
+                    <p class="merch-price-label">Tallas S a XL</p>
+                    <span class="merch-price-amount">$12</span>
+                </div>
+                <div class="merch-price-card">
+                    <p class="merch-price-label">Tallas 2XL en adelante</p>
+                    <span class="merch-price-amount">$15</span>
+                </div>
+            </div>
+
+            <div class="merch-payment-methods">
+                <p class="merch-payment-methods-title">Aceptamos pagos en:</p>
+                <div class="merch-payment-methods-list">
+                    <span class="merch-payment-chip">💵 Dólares en efectivo</span>
+                    <span class="merch-payment-chip">💱 Bolívares (tasa oficial BCV del día)</span>
+                    <span class="merch-payment-chip">₿ Binance</span>
+                </div>
+            </div>
+
+            <div class="info-note lime">
+                <p class="info-note-title">🎁 ¿Pagas en divisas (efectivo o Binance)?</p>
+                <p>Marca la casilla en el formulario y te contamos sobre el descuento especial al confirmar tu pedido.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DELIVERY POLICY -->
+    <section class="container">
+        <div class="merch-delivery-section">
+            <h3>¿Cuándo la recibo?</h3>
+            <p>Manejamos un tiempo de entrega de hasta <strong>15 días</strong> como margen de seguridad, aunque en la mayoría de los casos tu camisa está lista antes. Te avisamos apenas esté disponible para que la recojas o coordines la entrega.</p>
+        </div>
+    </section>
+
+    <!-- ORDER FORM -->
+    <section id="pedido" class="merch-order-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Haz tu pedido</h2>
+                <p>¿Quieres varias camisas? Agrégalas todas y te confirmamos por WhatsApp.</p>
+            </div>
+
+            <form id="merchOrderForm" class="merch-order-form">
+                <div class="merch-order-items" id="merchOrderItems">
+                    <!-- Filas de pedido generadas dinámicamente por mercancia.js -->
+                </div>
+
+                <button type="button" id="merchAddItemBtn" class="btn btn-secondary btn-block">
+                    + Agregar otra camisa
+                </button>
+
+                <label class="merch-discount-check">
+                    <input type="checkbox" id="merchDiscountCheck">
+                    Quiero saber sobre el descuento pagando en divisas (efectivo o Binance)
+                </label>
+
+                <button type="submit" id="merchSubmitBtn" class="btn btn-primary btn-block">
+                    Hacer mi pedido por WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER — rendered by components.js -->
+    <footer></footer>
+
+    <script src="config.js"></script>
+    <script src="components.js"></script>
+    <script src="mercancia.js"></script>
+</body>
+</html>
