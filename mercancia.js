@@ -46,15 +46,15 @@ function renderMerchGallery() {
                 <img src="${model.front}" alt="Camisa ${model.name}" class="merch-card-image" data-main-image loading="lazy">
                 <button type="button" class="merch-card-zoom" aria-label="Ver imagen en grande">🔍 Ampliar</button>
             </div>
-            ${hasBack ? `
-            <div class="merch-card-thumbs">
+            <div class="merch-card-thumbs${hasBack ? '' : ' merch-card-thumbs--hidden'}">
+                ${hasBack ? `
                 <button type="button" class="merch-card-thumb active" data-image="${model.front}" aria-label="Ver frente">
                     <img src="${model.front}" alt="Frente ${model.name}" loading="lazy">
                 </button>
                 <button type="button" class="merch-card-thumb" data-image="${model.back}" aria-label="Ver espalda">
                     <img src="${model.back}" alt="Espalda ${model.name}" loading="lazy">
-                </button>
-            </div>` : ''}
+                </button>` : ''}
+            </div>
             <div class="merch-card-body">
                 <h3 class="merch-card-name">${model.name}</h3>
                 <p class="merch-card-colors">${merchColors.join(' · ')}</p>
@@ -88,7 +88,7 @@ function renderMerchGallery() {
         }
 
         card.querySelector('.merch-card-zoom').addEventListener('click', () => {
-            openMerchLightbox(mainImage.src, model.name);
+            openMerchLightbox(model, mainImage.src);
         });
 
         card.querySelector('.merch-card-cta').addEventListener('click', () => {
@@ -102,13 +102,40 @@ function renderMerchGallery() {
 // ============================================
 // IMAGE ZOOM LIGHTBOX
 // ============================================
-function openMerchLightbox(src, alt) {
+function openMerchLightbox(model, initialSrc) {
     const lightbox = document.getElementById('merchLightbox');
     const lightboxImage = document.getElementById('merchLightboxImage');
-    if (!lightbox || !lightboxImage) return;
+    const lightboxTabs = document.getElementById('merchLightboxTabs');
+    if (!lightbox || !lightboxImage || !lightboxTabs) return;
 
-    lightboxImage.src = src;
-    lightboxImage.alt = alt;
+    const hasBack = Boolean(model.back);
+    lightboxImage.src = initialSrc || model.front;
+    lightboxImage.alt = model.name;
+    lightboxTabs.innerHTML = '';
+
+    if (hasBack) {
+        const views = [
+            { label: 'Frente', src: model.front },
+            { label: 'Espalda', src: model.back }
+        ];
+        views.forEach(view => {
+            const tab = document.createElement('button');
+            tab.type = 'button';
+            tab.className = 'merch-lightbox-tab';
+            tab.textContent = view.label;
+            if (lightboxImage.src.endsWith(view.src)) {
+                tab.classList.add('active');
+            }
+            tab.addEventListener('click', () => {
+                lightboxImage.src = view.src;
+                lightboxImage.alt = `${view.label} ${model.name}`;
+                lightboxTabs.querySelectorAll('.merch-lightbox-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+            lightboxTabs.appendChild(tab);
+        });
+    }
+
     lightbox.classList.add('active');
 }
 

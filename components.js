@@ -84,7 +84,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>PVJ 2026</h3>
-                    <p>Plan Vacacional Juvenil 2026: In-Cómoda-Mente. Gestionado bajo la coordinación de jóvenes, y Ministerio de Proclamación de la Iglesia Bautista Emanuel. Campamento con propósito de crecimiento espiritual en los jóvenes.</p>
+                    <p>Plan Vacacional Juvenil 2026: In-Cómoda-Mente. Gestionado por el Ministerio Juvenil de la Iglesia Bautista Emanuel (La Castellana, Caracas). Campamento con propósito de crecimiento espiritual en los jóvenes.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Enlaces Rápidos</h3>

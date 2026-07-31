@@ -4,9 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-PVJ (Proyecto Vida Juvenil) is a static marketing website for a youth camp event called **"In-Cómoda-Mente"**, targeting attendees aged 14–25 in Venezuela (Carabobo, Valencia). The event runs **August 24–28, 2026**, organized under the Ministerio de Proclamación of Iglesia Bautista Emanuel (IBE).
+PVJ (**Plan Vacacional Juvenil**) is a static marketing website for a youth camp event called **"In-Cómoda-Mente"**, targeting attendees aged 14–25. The event runs **August 24–28, 2026**, organized by the Ministerio Juvenil ("youth ministry") of Iglesia Bautista Emanuel (IBE), based in La Castellana, Caracas — the organizing group is from Caracas, not from the camp's host region.
 
-Biblical theme: Romanos 12:2 — "No se amolden al mundo actual, sino sean transformados."
+> **⚠️ These facts change every edition — do not treat them as permanent:**
+> - **Venue**: varies each year. For **2026** it's the Campamento Nacional Bautista, Campo Carabobo, Valencia (Carabobo state). Don't assume next year's edition uses the same location.
+> - **Biblical theme**: also specific to this edition. For **2026** it's Romanos 12:2 (NVI) — "No se amolden al mundo actual, sino sean transformados mediante la renovación de su mente. Así podrán comprobar cómo es la voluntad de Dios: buena, agradable y perfecta." Always include the version (e.g. "NVI") when quoting Scripture, and update every occurrence (hero, JSON-LD, `llms.txt`, README) together if it changes.
 
 ## Development
 
