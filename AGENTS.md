@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository. [AGENTS.md](AGENTS.md) mirrors this file for other AI coding tools — **keep both in sync when editing either one.**
+This file provides guidance to AI coding agents (Cursor, Codex, Windsurf, and similar tools reading the [AGENTS.md](https://agents.md) convention) when working with code in this repository. [CLAUDE.md](CLAUDE.md) mirrors this file for Claude Code — **keep both in sync when editing either one.**
 
 ## Project Overview
 
