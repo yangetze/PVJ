@@ -25,7 +25,7 @@ const merchModels = [
     }
 ];
 
-const merchColors = ['Blanco', 'Negro', 'Gris', 'Beige/Crema'];
+const merchColors = ['Blanco', 'Negro', 'Gris', 'Beige'];
 const merchSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
 
 // ============================================
@@ -44,7 +44,7 @@ function renderMerchGallery() {
             ${model.bestSeller ? '<span class="merch-card-badge">🔥 Más Vendido</span>' : ''}
             <div class="merch-card-image-wrap">
                 <img src="${model.front}" alt="Camisa ${model.name}" class="merch-card-image" data-main-image loading="lazy">
-                <button type="button" class="merch-card-zoom" aria-label="Ver imagen en grande">🔍 Zoom</button>
+                <button type="button" class="merch-card-zoom" aria-label="Ver imagen en grande">🔍 Ampliar</button>
             </div>
             ${hasBack ? `
             <div class="merch-card-thumbs">
