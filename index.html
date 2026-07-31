@@ -92,6 +92,26 @@
       "url": "https://pvjcampamento.com/"
     }
     </script>
+
+    <!-- Structured Data: FAQPage — keep in sync with faqData in main.js -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Qué debo llevar al campamento?", "acceptedAnswer": { "@type": "Answer", "text": "Debes traer: ropa cómoda para actividades al aire libre, traje de baño, toalla, aseo personal, sábanas y cobijas, medicamentos (si aplica) y documentos de identidad. Te recomendamos no traer objetos de valor como joyas o equipos electrónicos costosos — el equipo no se responsabiliza por pérdidas o daños de objetos personales." } },
+        { "@type": "Question", "name": "¿Se incluye el transporte?", "acceptedAnswer": { "@type": "Answer", "text": "¡Sí, el transporte está incluido! Contarás con traslado desde la iglesia hasta Campo Carabobo en un transporte cómodo y seguro. No tienes que preocuparte por cómo llegar — nosotros te llevamos." } },
+        { "@type": "Question", "name": "¿Cuáles son los métodos de pago aceptados?", "acceptedAnswer": { "@type": "Answer", "text": "Aceptamos Bs. por pago móvil o transferencia a la tasa euro del día BCV. También recibimos efectivo en dólares o euros. Si dispones de otro método de pago, consúltalo al equipo." } },
+        { "@type": "Question", "name": "¿Puedo pagar en cuotas?", "acceptedAnswer": { "@type": "Answer", "text": "No somos el logo amarillo, pero definitivamente puedes pagar en cómodas cuotas." } },
+        { "@type": "Question", "name": "¿Cómo puedo apartar mi cupo?", "acceptedAnswer": { "@type": "Answer", "text": "Debes realizar un abono de mínimo 10 € a la tasa del día. Si tienes dudas, puedes consultarlo los domingos al finalizar cada culto, o escribirnos por Instagram o WhatsApp, o consultarlo con el staff." } },
+        { "@type": "Question", "name": "¿Cuál es la fecha límite para terminar de pagar?", "acceptedAnswer": { "@type": "Answer", "text": "5 días antes del comienzo del evento. Si tienes dudas, acércate a la mesa el día domingo." } },
+        { "@type": "Question", "name": "¿Hay límite de participantes?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, el campamento tiene un cupo máximo de 70 personas. Las inscripciones son por orden de llegada y los cupos se llenan rápido." } },
+        { "@type": "Question", "name": "¿Qué pasa si tengo alergias o restricciones alimentarias?", "acceptedAnswer": { "@type": "Answer", "text": "Es importante que nos cuentes si tienes alguna alergia, intolerancia o restricción alimentaria, para que el equipo pueda ajustarse a tus necesidades." } },
+        { "@type": "Question", "name": "¿Para qué edades es el campamento?", "acceptedAnswer": { "@type": "Answer", "text": "El campamento es para jóvenes de 14 a 25 años." } },
+        { "@type": "Question", "name": "¿Necesito ser cristiano o asistir a una iglesia para asistir al campamento?", "acceptedAnswer": { "@type": "Answer", "text": "Todos son bienvenidos." } }
+      ]
+    }
+    </script>
 </head>
 <body>
     <!-- HEADER & NAVIGATION — rendered by components.js -->
@@ -103,6 +123,7 @@
             <a href="/#payment">Inversión</a>
             <a href="/pagos.html">Reportar Pago</a>
             <a href="/donaciones.html">Donaciones</a>
+            <a href="/mercancia.html">Mercancía</a>
         </nav>
     </noscript>
 
@@ -292,6 +313,23 @@
         <div class="faq-container" id="faqContainer">
             <!-- FAQs will be dynamically generated -->
         </div>
+
+        <!-- Static fallback for crawlers/AI agents that don't execute JS.
+             Keep in sync with faqData in main.js. -->
+        <noscript>
+            <div class="faq-container">
+                <div class="faq-item active"><div class="faq-question"><span class="faq-question-text">¿Qué debo llevar al campamento?</span></div><div class="faq-answer"><div class="faq-answer-content"><p>Debes traer: ropa cómoda para actividades al aire libre, traje de baño, toalla, aseo personal, sábanas y cobijas, medicamentos (si aplica) y documentos de identidad. Te recomendamos no traer objetos de valor como joyas o equipos electrónicos costosos — el equipo no se responsabiliza por pérdidas o daños de objetos personales.</p></div></div></div>
+                <div class="faq-item active"><div class="faq-question"><span class="faq-question-text">¿Se incluye el transporte?</span></div><div class="faq-answer"><div class="faq-answer-content"><p>¡Sí, el transporte está incluido! Contarás con traslado desde la iglesia hasta Campo Carabobo en un transporte cómodo y seguro. No tienes que preocuparte por cómo llegar — nosotros te llevamos.</p></div></div></div>
+                <div class="faq-item active"><div class="faq-question"><span class="faq-question-text">¿Cuáles son los métodos de pago aceptados?</span></div><div class="faq-answer"><div class="faq-answer-content"><p>Aceptamos Bs. por pago móvil o transferencia a la tasa euro del día BCV. También recibimos efectivo en dólares o euros. Si dispones de otro método de pago, consúltalo al equipo.</p></div></div></div>
+                <div class="faq-item active"><div class="faq-question"><span class="faq-question-text">¿Puedo pagar en cuotas?</span></div><div class="faq-answer"><div class="faq-answer-content"><p>No somos el logo amarillo, pero definitivamente puedes pagar en cómodas cuotas.</p></div></div></div>
+                <div class="faq-item active"><div class="faq-question"><span class="faq-question-text">¿Cómo puedo apartar mi cupo?</span></div><div class="faq-answer"><div class="faq-answer-content"><p>Debes realizar un abono de mínimo 10 € a la tasa del día. Si tienes dudas, puedes consultarlo los domingos al finalizar cada culto, o escribirnos por Instagram o WhatsApp, o consultarlo con el staff.</p></div></div></div>
+                <div class="faq-item active"><div class="faq-question"><span class="faq-question-text">¿Cuál es la fecha límite para terminar de pagar?</span></div><div class="faq-answer"><div class="faq-answer-content"><p>5 días antes del comienzo del evento. Si tienes dudas, acércate a la mesa el día domingo.</p></div></div></div>
+                <div class="faq-item active"><div class="faq-question"><span class="faq-question-text">¿Hay límite de participantes?</span></div><div class="faq-answer"><div class="faq-answer-content"><p>Sí, el campamento tiene un cupo máximo de 70 personas. Las inscripciones son por orden de llegada y los cupos se llenan rápido. Si estás leyendo esto, todavía hay campo — ¡no esperes más para asegurar tu lugar!</p></div></div></div>
+                <div class="faq-item active"><div class="faq-question"><span class="faq-question-text">¿Qué pasa si tengo alergias o restricciones alimentarias?</span></div><div class="faq-answer"><div class="faq-answer-content"><p>Es importante que nos cuentes si tienes alguna alergia, intolerancia o restricción alimentaria. Esa información es valiosa para que el equipo pueda ajustarse de la mejor manera posible y estar al tanto de tus necesidades.</p></div></div></div>
+                <div class="faq-item active"><div class="faq-question"><span class="faq-question-text">¿Para qué edades es el campamento?</span></div><div class="faq-answer"><div class="faq-answer-content"><p>El campamento es para jóvenes de 14 a 25 años. Así logramos crear un espacio donde todos se sientan identificados y puedan conectar de verdad. Si tienes dudas, escríbenos.</p></div></div></div>
+                <div class="faq-item active"><div class="faq-question"><span class="faq-question-text">¿Necesito ser cristiano o asistir a una iglesia para asistir al campamento?</span></div><div class="faq-answer"><div class="faq-answer-content"><p>Todos son bienvenidos.</p></div></div></div>
+            </div>
+        </noscript>
     </section>
 
     <!-- FOOTER — rendered by components.js -->
