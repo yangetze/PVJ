@@ -185,7 +185,7 @@ function buildMerchWhatsAppMessage(discountRequested) {
         return `${index + 1}. Modelo ${modelo} | Color ${color} | Talla ${talla} | Cantidad: ${cantidad}`;
     });
 
-    let message = `¡Hola! 👋 Quiero hacer un pedido de camisas de In-Cómoda-Mente:\n\n${lines.join('\n')}`;
+    let message = `¡Hola! Quiero hacer un pedido de camisas de In-Cómoda-Mente:\n\n${lines.join('\n')}`;
 
     if (discountRequested) {
         message += '\n\nTambién me gustaría saber sobre el descuento pagando en divisas (efectivo o Binance).';
