@@ -26,11 +26,36 @@
 
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Structured Data: FAQPage — keep in sync with donacionesFaqData in donaciones.js -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Dónde va exactamente mi dinero?", "acceptedAnswer": { "@type": "Answer", "text": "Tu donación cubre los costos reales de la beca del joven: inscripción, alojamiento, comidas, transporte y actividades del programa. 100% del dinero va a la experiencia del joven, sin intermediarios ni comisiones administrativas." } },
+        { "@type": "Question", "name": "¿Sé quién es el joven al que ayudo?", "acceptedAnswer": { "@type": "Answer", "text": "Por confidencialidad no se comparten nombres completos de menores de edad, pero se entrega una descripción anónima, historias de impacto, fotos sin identificación y testimonios cuando la familia autoriza." } },
+        { "@type": "Question", "name": "¿Puedo donar menos de €95?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Una beca completa equivale a €95, pero puedes donar cualquier monto y la comunidad se une para completar cada beca." } },
+        { "@type": "Question", "name": "¿Qué pasa si se juntan más fondos de los necesarios?", "acceptedAnswer": { "@type": "Answer", "text": "Cada euro extra se invierte en llevar a más adolescentes y jóvenes al campamento, ampliando el número de becas si se supera la meta." } },
+        { "@type": "Question", "name": "¿Qué si no llegamos a la meta de 10 becas?", "acceptedAnswer": { "@type": "Answer", "text": "Se priorizará a los jóvenes con mayor necesidad económica y compromiso ministerial, aunque cada donación acerca más a la meta." } }
+      ]
+    }
+    </script>
 </head>
 <body>
 
     <!-- HEADER & NAVIGATION — rendered by components.js -->
     <header></header>
+    <noscript>
+        <nav aria-label="Navegación principal">
+            <a href="/">Inicio</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfiJoNvwPer5zCyQQHRjPz2hSFAqCRCx5FT6Ea9flY4GWRAHQ/viewform" rel="noopener noreferrer">Inscribirme</a>
+            <a href="/#payment">Inversión</a>
+            <a href="/pagos.html">Reportar Pago</a>
+            <a href="/donaciones.html">Donaciones</a>
+            <a href="/mercancia.html">Mercancía</a>
+        </nav>
+    </noscript>
 
     <!-- PAGE HERO -->
     <section class="page-hero">
@@ -257,6 +282,18 @@
         <div class="faq-container" id="donacionesFaqContainer">
             <!-- FAQs generados dinámicamente por donaciones.js -->
         </div>
+
+        <!-- Static fallback for crawlers/AI agents that don't execute JS.
+             Keep in sync with donacionesFaqData in donaciones.js. -->
+        <noscript>
+            <div class="faq-container">
+                <div class="faq-item active"><div class="faq-question"><span class="faq-question-text">¿Dónde va exactamente mi dinero?</span></div><div class="faq-answer"><div class="faq-answer-content"><p>Tu donación cubre los costos reales de la beca del joven: desde la inscripción y el alojamiento en cabañas, hasta las comidas durante los 4 días, el transporte y todas las actividades del programa. 100% del dinero va a la experiencia del joven. No hay intermediarios ni comisiones administrativas.</p></div></div></div>
+                <div class="faq-item active"><div class="faq-question"><span class="faq-question-text">¿Sé quién es el joven al que ayudo?</span></div><div class="faq-answer"><div class="faq-answer-content"><p>Por confidencialidad, no compartimos nombres completos de menores de edad, pero recibirás una descripción anónima, historias de impacto post-campamento, fotos sin identificación y testimonios (si la familia autoriza).</p></div></div></div>
+                <div class="faq-item active"><div class="faq-question"><span class="faq-question-text">¿Puedo donar menos de €95?</span></div><div class="faq-answer"><div class="faq-answer-content"><p>Sí. Una beca completa equivale a €95, pero puedes donar cualquier monto — €10, €25, €50 — y la comunidad se une para completar cada beca.</p></div></div></div>
+                <div class="faq-item active"><div class="faq-question"><span class="faq-question-text">¿Qué pasa si se juntan más fondos de los necesarios?</span></div><div class="faq-answer"><div class="faq-answer-content"><p>Cada euro extra se invierte en lo mismo: llevar a más adolescentes y jóvenes al campamento, ampliando el número de becas si superamos la meta.</p></div></div></div>
+                <div class="faq-item active"><div class="faq-question"><span class="faq-question-text">¿Qué si no llegamos a la meta de 10 becas?</span></div><div class="faq-answer"><div class="faq-answer-content"><p>Si faltan fondos, priorizaremos a los jóvenes con mayor necesidad económica y compromiso ministerial, pero cada donación nos acerca más a la meta.</p></div></div></div>
+            </div>
+        </noscript>
     </section>
 
     <!-- FINAL CTA -->

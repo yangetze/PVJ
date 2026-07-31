@@ -21,6 +21,7 @@
         { href: `${idxPrefix}#payment`,         label: 'Inversión',   activeFile: 'index.html',       isAnchor: true },
         { href: 'pagos.html',                   label: 'Reportar Pago', activeFile: 'pagos.html',     isAnchor: false },
         { href: 'donaciones.html',              label: 'Donaciones',  activeFile: 'donaciones.html',  isAnchor: false },
+        { href: 'mercancia.html',               label: 'Mercancía',   activeFile: 'mercancia.html',   isAnchor: false },
     ];
 
     function getActiveAttr(item) {
@@ -83,7 +84,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>PVJ 2026</h3>
-                    <p>Plan Vacacional Juvenil 2026: In-Cómoda-Mente. Gestionado bajo la coordinación de jóvenes, y Ministerio de Proclamación de la Iglesia Bautista Emanuel. Campamento con propósito de crecimiento espiritual en los jóvenes.</p>
+                    <p>Plan Vacacional Juvenil 2026: In-Cómoda-Mente. Gestionado por el Ministerio Juvenil de la Iglesia Bautista Emanuel (La Castellana, Caracas). Campamento con propósito de crecimiento espiritual en los jóvenes.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Enlaces Rápidos</h3>
@@ -93,6 +94,7 @@
                         <li><a href="${idxPrefix}#payment">Información de Pago</a></li>
                         <li><a href="pagos.html">Reportar Pago</a></li>
                         <li><a href="donaciones.html">Donaciones</a></li>
+                        <li><a href="mercancia.html">Mercancía</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">

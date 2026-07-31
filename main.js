@@ -8,7 +8,7 @@ const faqData = [
     },
     {
         question: "¿Se incluye el transporte?",
-        answer: "¡Sí, el transporte está incluido! Contarás con traslado desde la iglesia hasta Campo Carabobo en un transporte cómodo y seguro. No tienes que preocuparte por cómo llegar — nosotros te llevamos."
+        answer: "¡Sí, el transporte está incluido! Contarás con traslado desde la iglesia hasta el Campamento Nacional Bautista en Campo Carabobo, en un transporte cómodo y seguro. No tienes que preocuparte por cómo llegar — nosotros te llevamos."
     },
     {
         question: "¿Cuáles son los métodos de pago aceptados?",
