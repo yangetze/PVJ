@@ -87,11 +87,11 @@ Every `.html` file must load scripts in this exact order just before `</body>`:
 8. Add the page to `sitemap.xml` (unless it's a pure redirect stub like `calculadora.html`).
 9. If the page renders content from a JS data array (FAQ, catalog, etc.), add a matching `<noscript>` fallback and JSON-LD structured data — see below.
 
-> **Deployment:** `.github/workflows/deploy.yml` uses `rsync` and deploys the entire repo (excluding `CLAUDE.md`, `docs/`, `.github/`, and `.git`). New pages are picked up automatically — **no changes to `deploy.yml` needed** when adding or removing pages. Only update `deploy.yml` if the excluded paths change or the hosting configuration changes.
+> **Deployment:** production (https://pvjcampamento.com/) is deployed **manually via Hostinger** — there is no automatic pipeline, so merging to `main` does not publish anything by itself. `.github/workflows/deploy.yml` is disabled (`on: []`) and `deploy.php` is a dormant remnant of the old GitHub Actions → webhook → `git pull` + `rsync` flow; neither runs today, and neither needs editing when adding or removing pages. Never upload repo-only files (`CLAUDE.md`, `AGENTS.md`, `README.md`, `docs/`, `.github/`, `.git/`, `deploy.php`) to the server.
 
 ### Removing a page
 
-Delete the `.html` file and its page-specific `.js` file (if any). Remove its entry from `NAV_ITEMS` in `components.js`. The next deploy will automatically remove it from the server (`rsync --delete` is active).
+Delete the `.html` file and its page-specific `.js` file (if any). Remove its entry from `NAV_ITEMS` in `components.js`, from the `<noscript>` nav block on every page, and from `sitemap.xml`. Deployment is manual, so deleting the file from the repo does **not** remove it from the server — delete it from Hostinger as part of the deploy.
 
 ### Modifying the shared nav or footer
 
