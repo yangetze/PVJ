@@ -50,4 +50,6 @@ python3 -m http.server 8080
 
 ## Despliegue
 
-El repositorio se despliega automáticamente vía GitHub Actions (`.github/workflows/deploy.yml`) usando `rsync` al servidor de producción en cada push a `main`.
+El despliegue a producción (https://pvjcampamento.com/) es **manual, vía Hostinger**. No hay pipeline automático: los cambios en `main` no llegan solos al servidor.
+
+El flujo anterior — GitHub Actions llamando a `deploy.php` por webhook HTTPS, que hacía `git pull` + `rsync` en el servidor — está **desactivado**. `.github/workflows/deploy.yml` se conserva sin triggers (`on: []`) y `deploy.php` sigue en el repo por si se quisiera reactivar; ninguno de los dos se ejecuta hoy.
